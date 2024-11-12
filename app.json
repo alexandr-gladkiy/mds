@@ -3,13 +3,15 @@
   "name": "AG_MDS",
   "publisher": "AG Master Data Service",
   "version": "1.0.0.0",
-  "brief": "",
+  "brief": "dd",
   "description": "Master data services",
-  "privacyStatement": "",
-  "EULA": "",
-  "help": "",
-  "url": "",
-  "logo": "",
+  "privacyStatement": "https://sdfs.com",
+  "EULA": "https://sdfs.com",
+  "help": "https://sdfs.com",
+  "url": "https://sdfs.com",
+  "contextSensitiveHelpUrl": "https://sdfs.com",
+  "applicationInsightsConnectionString": "https://learn.microsoft.com/dynamics365/business-central/dev-itpro/administration/telemetry-overview",
+  "logo": "Sources/App.png",
   "dependencies": [],
   "screenshots": [],
   "platform": "1.0.0.0",
@@ -27,6 +29,7 @@
   },
   "runtime": "14.0",
   "features": [
-    "NoImplicitWith"
+    "NoImplicitWith",
+    "TranslationFile"
   ]
 }

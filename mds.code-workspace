@@ -4,5 +4,69 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"al.codeAnalyzers": [
+			"${UICop}",
+			"${AppSourceCop}"
+		],
+		"al.enableCodeAnalysis": true,
+		"al.enableCodeActions": true,
+		"CRS.OnSaveAlFileAction": "Rename",
+		"CRS.FileNamePattern": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+		"CRS.FileNamePatternExtensions": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+		"CRS.FileNamePatternPageCustomizations": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+		"editor.formatOnSave": true,
+		"al.ruleSetPath": "./.codeAnalysis/app.ruleset.json",
+		"errorLens.errorColor": "rgba(240,0,0,0.2)",
+		"errorLens.fontMargin": "60px",
+		"errorLens.hintColor": "rgba(20,140,140,0.1)",
+		"errorLens.infoColor": "rgba(0,200,0,0.1)",
+		"errorLens.warningColor": "rgba(180,180,0,0.1)",
+		//"errorLens.addAnnotationTextPrefixes": false,
+		"errorLens.messageTemplate": "$message",
+		"errorLens.errorTextColor": "rgba(240,0,0,0.8)",
+		"errorLens.hintTextColor": "rgba(20,140,140,1.0)",
+		"errorLens.infoTextColor": "rgba(0,200,0,1.0)",
+		"errorLens.warningTextColor": "rgba(180,180,0,1.0)",
+		"errorLens.fontWeight": "100",
+		"editor.codeActionsOnSave": {
+			"source.fixAll.al": "explicit"
+		},
+		"alOutline.addDataItemToReportColumnName": true,
+		"alOutline.autoGenerateFiles": true,
+		"alOutline.codeActionsOnSave": [
+			"SortTableFields"
+			/*,
+			"SortReportColumns",
+			"SortProperties",
+			"SortProcedures",
+			"SortVariables",
+			"SortPermissions",
+			"SortPermissionSetList"
+			*/
+		],
+		"alOutline.fixCodeCopMissingParenthesesOnSave": true,
+		"alOutline.lockRemovedFieldsCaptions": true,
+		"alOutline.openDefinitionInNewTab": true,
+		"CRS.DisableDefaultAlSnippets": true,
+		"al-xml-doc.CheckObjectDocumentationInformationLevel": "Warning",
+		"al-xml-doc.DocumentationExportSchema": "Project File + Object File + Procedure File",
+		"markdownlint.config": {
+			"AS0084": false,
+			"MD028": false,
+			"MD025": {
+				"front_matter_title": ""
+			}
+		},
+		"al-test-runner.sendDebugTelemetry": false,
+		"al.showHomeAtStartup": "WhenUpdated",
+		"githubPullRequests.ignoredPullRequestBranches": [
+			"main"
+		],
+		"workbench.editor.empty.hint": "hidden",
+		"al.assemblyProbingPaths": [
+			"./.netpackages",
+			"C:\\Windows\\Microsoft.NET\\assembly"
+		]
+	}
 }
