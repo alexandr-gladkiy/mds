@@ -1,0 +1,32 @@
+{
+  "id": "a407e787-edf8-48d6-a357-ce7d74476b11",
+  "name": "AG_MDS",
+  "publisher": "AG Master Data Service",
+  "version": "1.0.0.0",
+  "brief": "",
+  "description": "Master data services",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "25.0.0.0",
+  "idRanges": [
+    {
+      "from": 50100,
+      "to": 50149
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "runtime": "14.0",
+  "features": [
+    "NoImplicitWith"
+  ]
+}
