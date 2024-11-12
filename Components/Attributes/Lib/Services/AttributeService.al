@@ -65,6 +65,22 @@ codeunit 50101 "MDS Attribute Service"
         exit(GlobalAttribute.Status = GlobalAttribute.Status::Inactive);
     end;
 
+    procedure "GetSetOf.ByGroupCode"(GroupCode: Code[20]; var Attribute: Record "MDS Attribute"): Boolean
+    begin
+        Attribute.Reset();
+        Attribute.SetCurrentKey("Group Code");
+        Attribute.SetRange("Group Code", GroupCode);
+        exit(not Attribute.IsEmpty());
+    end;
+
+    procedure "GetSetOf.ByParentCode"(ParentCode: Code[20]; var Attribute: Record "MDS Attribute"): Boolean
+    begin
+        Attribute.Reset();
+        Attribute.SetCurrentKey("Parent Code");
+        Attribute.SetRange("Group Code", ParentCode);
+        exit(not Attribute.IsEmpty());
+    end;
+
     local procedure TestSetup()
     var
         AttributeIsNotSetupError: Label 'Attribute is not setup. \Use Set procedure first.';
@@ -72,20 +88,4 @@ codeunit 50101 "MDS Attribute Service"
         if not GlobalIsSetup then
             Error(AttributeIsNotSetupError);
     end;
-    //TODO:
-    /*
-        Set
-        IsSet
-        IsActive
-        GetStatus
-        GetFieldValue(FieldNo):Variant - GetFieldValue From RecRef Helper
-
-        Get<FieldName>(DoTestField)
-
-        TestSet()
-
-        SetFieldValue(FieldNo, Value, DoTestEmptyValue)
-
-        Set<FieldName>(Value, DoTestEmptyValue)
-    */
 }

@@ -47,11 +47,12 @@ table 50100 "MDS Attribute"
         {
             Clustered = true;
         }
+        key(Key1; "Group Code") { }
+        key(Key2; "Parent Code") { }
     }
     fieldgroups
     {
-        fieldgroup(DrawDown; "Group Code", Code, Name, Type, Status)
-        { }
+        fieldgroup(DrawDown; "Group Code", Code, Name, Type, Status) { }
     }
 
     var
