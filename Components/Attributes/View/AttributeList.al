@@ -5,6 +5,7 @@ page 50100 "MDS Attribute List"
     PageType = List;
     SourceTable = "MDS Attribute";
     UsageCategory = Lists;
+    DelayedInsert = true;
 
     layout
     {
@@ -12,6 +13,14 @@ page 50100 "MDS Attribute List"
         {
             repeater(General)
             {
+                field("Group Code"; Rec."Group Code")
+                {
+                    ToolTip = 'Specifies the value of the Group Code field.', Comment = '%';
+                }
+                field("Parent Code"; Rec."Parent Code")
+                {
+                    ToolTip = 'Specifies the value of the Parent Code field.', Comment = '%';
+                }
                 field("Code"; Rec."Code")
                 {
                     ToolTip = 'Specifies the value of the Code field.', Comment = '%';
@@ -27,6 +36,11 @@ page 50100 "MDS Attribute List"
                 field(Status; Rec.Status)
                 {
                     ToolTip = 'Specifies the value of the Status field.', Comment = '%';
+                }
+                field("Indent Level"; Rec."Indent Level")
+                {
+                    ToolTip = 'Specifies the value of the Indent Level field.', Comment = '%';
+                    Visible = false;
                 }
             }
         }

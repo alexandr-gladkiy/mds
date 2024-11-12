@@ -4,6 +4,7 @@ page 50101 "MDS Attribute Card"
     Caption = 'MDS Attribute Card';
     PageType = Card;
     SourceTable = "MDS Attribute";
+    DelayedInsert = true;
 
     layout
     {
@@ -24,6 +25,14 @@ page 50101 "MDS Attribute Card"
                 field("Type"; Rec."Type")
                 {
                     ToolTip = 'Specifies the value of the Type field.', Comment = '%';
+                }
+                field("Group Code"; Rec."Group Code")
+                {
+                    ToolTip = 'Specifies the value of the Group Code field.', Comment = '%';
+                }
+                field("Parent Code"; Rec."Parent Code")
+                {
+                    ToolTip = 'Specifies the value of the Parent Code field.', Comment = '%';
                 }
                 field(Status; Rec.Status)
                 {
