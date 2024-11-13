@@ -18,7 +18,7 @@ table 50100 "MDS Attribute"
         {
             Caption = 'Name';
         }
-        field(3; "Type"; Enum "MDS Attribute Type")
+        field(3; Type; Enum "MDS Attribute Type")
         {
             Caption = 'Type';
         }
@@ -64,7 +64,7 @@ table 50100 "MDS Attribute"
     begin
         OnBeforeOnInsert(Rec, IsHandled);
         if not IsHandled then
-            AttributeMgt.AttributeOnInsert(Rec);
+            AttributeMgt."Attribute.OnInsert"(Rec);
         OnAfterOnInsert(Rec, IsHandled)
     end;
 
@@ -74,7 +74,7 @@ table 50100 "MDS Attribute"
     begin
         OnBeforeOnModify(Rec, xRec, IsHandled);
         if not IsHandled then
-            AttributeMgt.AttributeOnModify(Rec, xRec);
+            AttributeMgt."Attribute.OnModify"(Rec, xRec);
         OnAfterOnModify(Rec, xRec, IsHandled);
     end;
 
@@ -84,7 +84,7 @@ table 50100 "MDS Attribute"
     begin
         OnBeforeOnDelete(Rec, IsHandled);
         if not IsHandled then
-            AttributeMgt.AttributeOnDelete(Rec);
+            AttributeMgt."Attribute.OnDelete"(Rec);
         OnAfterOnDelete(Rec, IsHandled);
     end;
 
@@ -94,7 +94,7 @@ table 50100 "MDS Attribute"
     begin
         OnBeforeOnRename(Rec, xRec, IsHandled);
         if not IsHandled then
-            AttributeMgt.AttributeOnRename(Rec, xRec);
+            AttributeMgt."Attribute.OnRename"(Rec, xRec);
         OnAfterOnRename(Rec, xRec, IsHandled);
     end;
 

@@ -43,7 +43,7 @@ table 50101 "MDS Attribute Group"
     begin
         OnBeforeOnInsert(Rec, IsHandled);
         if not IsHandled then
-            AttributeMgt.AttributeGroupOnInsert(Rec);
+            AttributeMgt."AttributeGroup.OnInsert"(Rec);
         OnAfterOnInsert(Rec, IsHandled)
     end;
 
@@ -53,7 +53,7 @@ table 50101 "MDS Attribute Group"
     begin
         OnBeforeOnModify(Rec, xRec, IsHandled);
         if not IsHandled then
-            AttributeMgt.AttributeGroupOnModify(Rec, xRec);
+            AttributeMgt."AttributeGroup.OnModify"(Rec, xRec);
         OnAfterOnModify(Rec, xRec, IsHandled);
     end;
 
@@ -63,7 +63,7 @@ table 50101 "MDS Attribute Group"
     begin
         OnBeforeOnDelete(Rec, IsHandled);
         if not IsHandled then
-            AttributeMgt.AttributeGroupOnDelete(Rec);
+            AttributeMgt."AttributeGroup.OnDelete"(Rec);
         OnAfterOnDelete(Rec, IsHandled);
     end;
 
@@ -73,7 +73,7 @@ table 50101 "MDS Attribute Group"
     begin
         OnBeforeOnRename(Rec, xRec, IsHandled);
         if not IsHandled then
-            AttributeMgt.AttributeGroupOnRename(Rec, xRec);
+            AttributeMgt."AttributeGroup.OnRename"(Rec, xRec);
         OnAfterOnRename(Rec, xRec, IsHandled);
     end;
 

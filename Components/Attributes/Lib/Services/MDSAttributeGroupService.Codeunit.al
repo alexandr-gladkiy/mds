@@ -8,7 +8,7 @@ codeunit 50102 "MDS Attribute Group Service"
         GlobalAttributeGroup: Record "MDS Attribute Group";
         GlobalIsSetup: Boolean;
 
-    procedure Set(Code: Code[20]): Boolean
+    procedure "Set.ByPK"(Code: Code[20]): Boolean
     begin
         if GlobalIsSetup and (GlobalAttributeGroup.Code = Code) then
             exit(true);
@@ -16,7 +16,7 @@ codeunit 50102 "MDS Attribute Group Service"
         GlobalIsSetup := GlobalAttributeGroup.Get(Code);
     end;
 
-    procedure GetCode(DoTestField: Boolean): Code[20]
+    procedure "Get.Code"(DoTestField: Boolean): Code[20]
     begin
         TestSetup();
         if DoTestField then
@@ -24,7 +24,7 @@ codeunit 50102 "MDS Attribute Group Service"
         exit(GlobalAttributeGroup.Code);
     end;
 
-    procedure GetName(DoTestField: Boolean): Text[50]
+    procedure "Get.Name"(DoTestField: Boolean): Text[50]
     begin
         TestSetup();
         if DoTestField then
@@ -32,7 +32,7 @@ codeunit 50102 "MDS Attribute Group Service"
         exit(GlobalAttributeGroup.Name);
     end;
 
-    procedure GetStatus(): Enum "MDS Status"
+    procedure "Get.Status"(): Enum "MDS Status"
     begin
         TestSetup();
         exit(GlobalAttributeGroup.Status);
