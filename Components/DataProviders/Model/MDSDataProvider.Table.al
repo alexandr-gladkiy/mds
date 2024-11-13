@@ -49,7 +49,7 @@ table 50102 "MDS Data Provider"
     begin
         OnBeforeOnInsert(Rec, IsHandled);
         if not IsHandled then
-            DataProviderMgt.DataProviderOnInsert(Rec);
+            DataProviderMgt."DataProvider.OnInsert"(Rec);
         OnAfterOnInsert(Rec, IsHandled)
     end;
 
@@ -59,7 +59,7 @@ table 50102 "MDS Data Provider"
     begin
         OnBeforeOnModify(Rec, xRec, IsHandled);
         if not IsHandled then
-            DataProviderMgt.DataProviderOnModify(Rec, xRec);
+            DataProviderMgt."DataProvider.OnModify"(Rec, xRec);
         OnAfterOnModify(Rec, xRec, IsHandled);
     end;
 
@@ -69,7 +69,7 @@ table 50102 "MDS Data Provider"
     begin
         OnBeforeOnDelete(Rec, IsHandled);
         if not IsHandled then
-            DataProviderMgt.DataProviderOnDelete(Rec);
+            DataProviderMgt."DataProvider.OnDelete"(Rec);
         OnAfterOnDelete(Rec, IsHandled);
     end;
 
@@ -79,7 +79,7 @@ table 50102 "MDS Data Provider"
     begin
         OnBeforeOnRename(Rec, xRec, IsHandled);
         if not IsHandled then
-            DataProviderMgt.DataProviderOnRename(Rec, xRec);
+            DataProviderMgt."DataProvider.OnRename"(Rec, xRec);
         OnAfterOnRename(Rec, xRec, IsHandled);
     end;
 

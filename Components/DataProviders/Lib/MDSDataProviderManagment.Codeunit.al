@@ -7,24 +7,51 @@ codeunit 50103 "MDS Data Provider Managment"
     var
         GlobalDataProvider: Record "MDS Data Provider";
 
-    procedure DataProviderOnInsert(var DataProvider: Record "MDS Data Provider")
+    procedure "DataProvider.OnInsert"(var DataProvider: Record "MDS Data Provider")
     begin
         DataProvider.TestField(Code);
     end;
 
-    procedure DataProviderOnModify(var DataProvider: Record "MDS Data Provider"; xDataProvider: Record "MDS Data Provider")
+    procedure "DataProvider.OnModify"(var DataProvider: Record "MDS Data Provider"; xDataProvider: Record "MDS Data Provider")
     begin
 
     end;
 
-    procedure DataProviderOnDelete(var DataProvider: Record "MDS Data Provider")
+    procedure "DataProvider.OnDelete"(var DataProvider: Record "MDS Data Provider")
     begin
 
     end;
 
-    procedure DataProviderOnRename(var DataProvider: Record "MDS Data Provider"; xDataProvider: Record "MDS Data Provider")
+    procedure "DataProvider.OnRename"(var DataProvider: Record "MDS Data Provider"; xDataProvider: Record "MDS Data Provider")
     begin
 
+    end;
+
+
+
+    procedure "DataProvider.CreateOrModify.Single"(DataProvider: Record "MDS Data Provider"; RunTrigger: Boolean) RecordId: RecordId
+    begin
+        if GlobalDataProvider.Get(DataProvider.Code) then begin
+            GlobalDataProvider.TransferFields(DataProvider, false);
+            GlobalDataProvider.Modify(RunTrigger);
+        end else begin
+            GlobalDataProvider.Init();
+            GlobalDataProvider.TransferFields(DataProvider, true);
+            GlobalDataProvider.Insert(RunTrigger);
+        end;
+
+        RecordId := GlobalDataProvider.RecordId;
+    end;
+
+    procedure "DataProvider.CreateOrModify.List"(var DataProviderBuffer: Record "MDS Data Provider"; RunTrigger: Boolean) RecordIdList: List of [RecordId]
+    var
+        RecordId: RecordId;
+    begin
+        if DataProviderBuffer.FindSet(false) then
+            repeat
+                RecordId := "DataProvider.CreateOrModify.Single"(DataProviderBuffer, RunTrigger);
+                RecordIdList.Add(RecordId);
+            until DataProviderBuffer.Next() = 0;
     end;
 
 }
