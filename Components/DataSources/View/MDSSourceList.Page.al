@@ -1,11 +1,11 @@
 namespace mds.mds;
 
-page 50104 "MDS Data Provider List"
+page 50105 "MDS Source List"
 {
     ApplicationArea = All;
-    Caption = 'Data Provider List';
+    Caption = 'Source List';
     PageType = List;
-    SourceTable = "MDS Data Provider";
+    SourceTable = "MDS Source";
     UsageCategory = Lists;
     DelayedInsert = true;
 
@@ -15,21 +15,17 @@ page 50104 "MDS Data Provider List"
         {
             repeater(General)
             {
-                field("Code"; Rec."No.")
+                field("No."; Rec."No.")
                 {
-                    ToolTip = 'Specifies the value of the Code field.', Comment = '%';
+                    ToolTip = 'Specifies the value of the No. field.', Comment = '%';
                 }
                 field(Name; Rec.Name)
                 {
                     ToolTip = 'Specifies the value of the Name field.', Comment = '%';
                 }
-                field(Description; Rec.Description)
+                field("Data Provider No."; Rec."Data Provider No.")
                 {
-                    ToolTip = 'Specifies the value of the Description field.', Comment = '%';
-                }
-                field("Type"; Rec."Type")
-                {
-                    ToolTip = 'Specifies the value of the Type field.', Comment = '%';
+                    ToolTip = 'Specifies the value of the Data Provider No. field.', Comment = '%';
                 }
                 field(Status; Rec.Status)
                 {

@@ -9,7 +9,7 @@ codeunit 50103 "MDS Data Provider Managment"
 
     procedure "DataProvider.OnInsert"(var DataProvider: Record "MDS Data Provider")
     begin
-        DataProvider.TestField(Code);
+        DataProvider.TestField("No.");
     end;
 
     procedure "DataProvider.OnModify"(var DataProvider: Record "MDS Data Provider"; xDataProvider: Record "MDS Data Provider")
@@ -31,7 +31,7 @@ codeunit 50103 "MDS Data Provider Managment"
 
     procedure "DataProvider.CreateOrModify.Single"(DataProvider: Record "MDS Data Provider"; RunTrigger: Boolean) RecordId: RecordId
     begin
-        if GlobalDataProvider.Get(DataProvider.Code) then begin
+        if GlobalDataProvider.Get(DataProvider."No.") then begin
             GlobalDataProvider.TransferFields(DataProvider, false);
             GlobalDataProvider.Modify(RunTrigger);
         end else begin

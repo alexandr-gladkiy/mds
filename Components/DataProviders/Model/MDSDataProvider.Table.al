@@ -7,9 +7,9 @@ table 50102 "MDS Data Provider"
 
     fields
     {
-        field(1; "Code"; Code[20])
+        field(1; "No."; Code[20])
         {
-            Caption = 'Code';
+            Caption = 'No.';
         }
         field(2; Name; Text[50])
         {
@@ -30,14 +30,14 @@ table 50102 "MDS Data Provider"
     }
     keys
     {
-        key(PK; "Code")
+        key(PK; "No.")
         {
             Clustered = true;
         }
     }
     fieldgroups
     {
-        fieldgroup(DrawDown; Code, Name, Description, Type, Status) { }
+        fieldgroup(DrawDown; "No.", Name, Description, Type, Status) { }
     }
 
     var

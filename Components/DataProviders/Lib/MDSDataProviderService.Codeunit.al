@@ -8,20 +8,20 @@ codeunit 50104 "MDS Data Provider Service"
         GlobalDataProvider: Record "MDS Data Provider";
         GlobalIsSetup: Boolean;
 
-    procedure "Set.ByPK"(Code: Code[20]): Boolean
+    procedure "Set.ByPK"(No: Code[20]): Boolean
     begin
-        if GlobalIsSetup and (GlobalDataProvider.Code = Code) then
+        if GlobalIsSetup and (GlobalDataProvider."No." = No) then
             exit(true);
 
-        GlobalIsSetup := GlobalDataProvider.Get(Code);
+        GlobalIsSetup := GlobalDataProvider.Get(No);
     end;
 
-    procedure "Get.Code"(DoTestField: Boolean): Code[20]
+    procedure "Get.No"(DoTestField: Boolean): Code[20]
     begin
         TestSetup();
         if DoTestField then
-            GlobalDataProvider.TestField(Code);
-        exit(GlobalDataProvider.Code);
+            GlobalDataProvider.TestField("No.");
+        exit(GlobalDataProvider."No.");
     end;
 
     procedure "Get.Name"(DoTestField: Boolean): Text[50]

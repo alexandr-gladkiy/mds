@@ -18,5 +18,10 @@ permissionset 50100 "MDS Permissions"
         page "MDS Attribute List"=X,
         page "MDS Role Center"=X,
         tabledata "MDS Data Provider"=RIMD,
-        table "MDS Data Provider"=X;
+        table "MDS Data Provider"=X,
+        tabledata "MDS Source"=RIMD,
+        table "MDS Source"=X,
+        codeunit "MDS Data Provider Managment"=X,
+        codeunit "MDS Data Provider Service"=X,
+        page "MDS Data Provider List"=X;
 }
