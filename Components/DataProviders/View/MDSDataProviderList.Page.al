@@ -8,6 +8,7 @@ page 50104 "MDS Data Provider List"
     SourceTable = "MDS Data Provider";
     UsageCategory = Lists;
     DelayedInsert = true;
+    CardPageId = "MDS Data Provider Card";
 
     layout
     {

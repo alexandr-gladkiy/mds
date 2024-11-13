@@ -40,6 +40,22 @@ page 50103 "MDS Role Center"
                     RunPageMode = Edit;
                 }
             }
+            group(Sources)
+            {
+                Caption = 'Sources';
+                action("Data Provider")
+                {
+                    Caption = 'Data Provider';
+                    RunObject = page "MDS Data Provider List";
+                    RunPageMode = Edit;
+                }
+                action("Source")
+                {
+                    Caption = 'Source';
+                    RunObject = page "MDS Source List";
+                    RunPageMode = Edit;
+                }
+            }
         }
     }
 }

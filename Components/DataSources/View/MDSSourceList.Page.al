@@ -8,6 +8,7 @@ page 50105 "MDS Source List"
     SourceTable = "MDS Source";
     UsageCategory = Lists;
     DelayedInsert = true;
+    CardPageId = "MDS Source Card";
 
     layout
     {

@@ -18,6 +18,7 @@ table 50103 "MDS Source"
         field(3; "Data Provider No."; Code[20])
         {
             Caption = 'Data Provider No.';
+            TableRelation = "MDS Data Provider"."No.";
         }
         field(4; Status; Enum "MDS Status")
         {

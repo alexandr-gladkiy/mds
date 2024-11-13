@@ -6,6 +6,7 @@ page 50100 "MDS Attribute List"
     SourceTable = "MDS Attribute";
     UsageCategory = Lists;
     DelayedInsert = true;
+    CardPageId = "MDS Attribute Card";
 
     layout
     {

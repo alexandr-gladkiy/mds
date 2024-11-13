@@ -27,6 +27,15 @@ table 50102 "MDS Data Provider"
         {
             Caption = 'Status';
         }
+
+        field(10; "Web Base URL"; Text[250])
+        {
+            Caption = 'Web Base URL';
+        }
+        field(11; "Web Sitemap Url"; Text[250])
+        {
+            Caption = 'Web Sitemap Url';
+        }
     }
     keys
     {
