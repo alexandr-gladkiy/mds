@@ -17,8 +17,6 @@ permissionset 50100 "MDS Permissions"
         page "MDS Attribute Group List" = X,
         page "MDS Attribute List" = X,
         page "MDS Role Center" = X,
-        tabledata "MDS Data Provider" = RIMD,
-        table "MDS Data Provider" = X,
         tabledata "MDS Source" = RIMD,
         table "MDS Source" = X,
         codeunit "MDS Data Provider Managment" = X,
@@ -28,5 +26,11 @@ permissionset 50100 "MDS Permissions"
         codeunit "MDS Source Service" = X,
         page "MDS Data Provider Card" = X,
         page "MDS Source Card" = X,
-        page "MDS Source List" = X;
+        page "MDS Source List" = X,
+        tabledata "MDS Data Provider" = RIMD,
+        table "MDS Data Provider" = X,
+        codeunit "MDS Setup Managment" = X,
+        page "MDS Setup Card" = X,
+        tabledata "MDS Setup" = RIMD,
+        table "MDS Setup" = X;
 }

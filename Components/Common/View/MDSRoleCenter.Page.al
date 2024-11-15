@@ -22,6 +22,16 @@ page 50103 "MDS Role Center"
     {
         area(Sections)
         {
+            group(Setup)
+            {
+                Caption = 'Setup';
+                action("MDS Setup")
+                {
+                    Caption = 'MDS Setup';
+                    RunObject = page "MDS Setup Card";
+                    RunPageMode = Edit;
+                }
+            }
             group("Attribute")
             {
                 Caption = 'Attribute';
