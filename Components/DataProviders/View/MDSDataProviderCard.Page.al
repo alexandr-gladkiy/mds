@@ -58,4 +58,21 @@ page 50107 "MDS Data Provider Card"
             }
         }
     }
+    actions
+    {
+        area(Processing)
+        {
+            action("Test Connection")
+            {
+                trigger OnAction()
+                begin
+                    sDataProvider."Set.ByPK"(Rec."No.");
+                    sDataProvider."Impl.TestConnect"(true);
+                end;
+            }
+        }
+    }
+
+    var
+        sDataProvider: Codeunit "MDS Data Provider Service";
 }

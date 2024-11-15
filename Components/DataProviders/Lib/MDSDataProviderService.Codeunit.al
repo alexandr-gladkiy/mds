@@ -6,6 +6,8 @@ codeunit 50104 "MDS Data Provider Service"
 
     var
         GlobalDataProvider: Record "MDS Data Provider";
+        IDataProvider: Interface "MDS IData Provider";
+        IDataProviderIsInit: Boolean;
         GlobalIsSetup: Boolean;
 
     procedure "Set.ByPK"(No: Code[20]): Boolean
@@ -52,6 +54,22 @@ codeunit 50104 "MDS Data Provider Service"
         exit(GlobalDataProvider.Status);
     end;
 
+    procedure "Get.WebBaseUrl"(DoTestField: Boolean): Text[250]
+    begin
+        TestSetup();
+        if DoTestField then
+            GlobalDataProvider.TestField("Web Base URL");
+        exit(GlobalDataProvider."Web Base URL");
+    end;
+
+    procedure "Get.WebSitemapURL"(DoTestField: Boolean): Text[250]
+    begin
+        TestSetup();
+        if DoTestField then
+            GlobalDataProvider.TestField("Web Sitemap Url");
+        exit(GlobalDataProvider."Web Sitemap Url");
+    end;
+
     procedure IsSet(): Boolean
     begin
         exit(GlobalIsSetup);
@@ -81,5 +99,22 @@ codeunit 50104 "MDS Data Provider Service"
     begin
         if not GlobalIsSetup then
             Error(DataProviderIsNotSetupError);
+    end;
+
+    //------ TODO Create Factory
+    procedure "Impl.TestConnect"(ShowMessage: Boolean) IsConnected: Boolean
+    begin
+        TestSetup();
+        InitInterface("Get.Type"());
+        IsConnected := IDataProvider.TestConnect(ShowMessage);
+    end;
+
+    local procedure InitInterface(Type: Enum "MDS Data Provider Type")
+    begin
+        if IDataProviderIsInit and (GlobalDataProvider.Type = Type) then
+            exit;
+
+        IDataProvider := Type;
+        IDataProviderIsInit := true;
     end;
 }

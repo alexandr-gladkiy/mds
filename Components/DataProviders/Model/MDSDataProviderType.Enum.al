@@ -1,13 +1,15 @@
 namespace mds.mds;
 
-enum 50102 "MDS Data Provider Type"
+enum 50102 "MDS Data Provider Type" implements "MDS IData Provider"
 {
     Extensible = true;
 
     value(0; Website)
     {
         Caption = 'Website';
+        Implementation = "MDS IData Provider" = "MDS Website Impl.";
     }
+    /*
     value(1; oData)
     {
         Caption = 'oData';
@@ -28,4 +30,5 @@ enum 50102 "MDS Data Provider Type"
     {
         Caption = 'Selectel';
     }
+    */
 }
