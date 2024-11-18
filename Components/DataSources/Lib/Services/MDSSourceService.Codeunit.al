@@ -7,6 +7,7 @@ codeunit 50106 "MDS Source Service"
     var
         GlobalSource: Record "MDS Source";
         GlobalIsSetup: Boolean;
+        sDataProvider: Codeunit "MDS Data Provider Service";
 
     procedure "Set.ByPK"(No: Code[20]): Boolean
     begin
@@ -32,9 +33,11 @@ codeunit 50106 "MDS Source Service"
         exit(GlobalSource.Name);
     end;
 
-    procedure "Get.DataProviderNo"(): Code[20]
+    procedure "Get.DataProviderNo"(DoTestField: Boolean): Code[20]
     begin
         TestSetup();
+        if DoTestField then
+            GlobalSource.TestField("Data Provider No.");
         exit(GlobalSource."Data Provider No.");
     end;
 
@@ -42,6 +45,14 @@ codeunit 50106 "MDS Source Service"
     begin
         TestSetup();
         exit(GlobalSource.Status);
+    end;
+
+    procedure "Get.QueryString"(DoTestField: Boolean): Text[250]
+    begin
+        TestSetup();
+        if DoTestField then
+            GlobalSource.TestField("Query String");
+        exit(GlobalSource."Query String");
     end;
 
     procedure IsSet(): Boolean
@@ -73,6 +84,19 @@ codeunit 50106 "MDS Source Service"
     begin
         if not GlobalIsSetup then
             Error(SourceIsNotSetupError);
+    end;
+
+    procedure Call(): Boolean
+    var
+        ContentStream: InStream;
+        FileName: Text;
+    begin
+        TestSetup();
+        sDataProvider."Set.ByPK"("Get.DataProviderNo"(true));
+        if not sDataProvider."Impl.Call"(GlobalSource, ContentStream) then
+            exit(false);
+
+        DownloadFromStream(ContentStream, 'Select folder for download', '', '', FileName);
     end;
 
 }

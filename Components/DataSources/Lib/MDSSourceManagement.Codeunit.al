@@ -27,8 +27,6 @@ codeunit 50105 "MDS Source Management"
 
     end;
 
-
-
     procedure "Source.CreateOrModify.Single"(Source: Record "MDS Source"; RunTrigger: Boolean) RecordId: RecordId
     begin
         if GlobalSource.Get(Source."No.") then begin
@@ -43,7 +41,7 @@ codeunit 50105 "MDS Source Management"
         RecordId := GlobalSource.RecordId;
     end;
 
-    procedure "DataProvider.CreateOrModify.List"(var SourceBuffer: Record "MDS Source"; RunTrigger: Boolean) RecordIdList: List of [RecordId]
+    procedure "Source.CreateOrModify.List"(var SourceBuffer: Record "MDS Source"; RunTrigger: Boolean) RecordIdList: List of [RecordId]
     var
         RecordId: RecordId;
     begin
@@ -52,6 +50,27 @@ codeunit 50105 "MDS Source Management"
                 RecordId := "Source.CreateOrModify.Single"(SourceBuffer, RunTrigger);
                 RecordIdList.Add(RecordId);
             until SourceBuffer.Next() = 0;
+    end;
+
+
+    procedure "SourceHttpHeader.OnInsert"(var SourceHttpHeader: Record "MDS Source Http Header")
+    begin
+
+    end;
+
+    procedure "SourceHttpHeader.OnModify"(var SourceHttpHeader: Record "MDS Source Http Header"; xSourceHttpHeader: Record "MDS Source Http Header")
+    begin
+
+    end;
+
+    procedure "SourceHttpHeader.OnDelete"(var SourceHttpHeader: Record "MDS Source Http Header")
+    begin
+
+    end;
+
+    procedure "SourceHttpHeader.OnRename"(var SourceHttpHeader: Record "MDS Source Http Header"; xSourceHttpHeader: Record "MDS Source Http Header")
+    begin
+
     end;
 
 }

@@ -5,7 +5,7 @@ codeunit 50104 "MDS Data Provider Service"
     Subtype = Normal;
 
     var
-        GlobalDataProvider: Record "MDS Data Provider";
+        GlobalDataProvider: Record "MDS Data Provider"; //TODO: переделать на DataProvider, обращения переписать через this.
         IDataProvider: Interface "MDS IData Provider";
         IDataProviderIsInit: Boolean;
         GlobalIsSetup: Boolean;
@@ -101,12 +101,28 @@ codeunit 50104 "MDS Data Provider Service"
             Error(DataProviderIsNotSetupError);
     end;
 
-    //------ TODO Create Factory
+    //------ Interface Implementation ------
     procedure "Impl.TestConnect"(ShowMessage: Boolean) IsConnected: Boolean
     begin
         TestSetup();
         InitInterface("Get.Type"());
-        IsConnected := IDataProvider.TestConnect(ShowMessage);
+        if IDataProvider.SetDataProvider("Get.No"(true)) then
+            IsConnected := IDataProvider.TestConnect(ShowMessage);
+    end;
+
+    procedure "Impl.SetDataProvider"() IsSet: Boolean
+    begin
+        TestSetup();
+        InitInterface("Get.Type"());
+        IsSet := IDataProvider.SetDataProvider("Get.No"(true));
+    end;
+
+    procedure "Impl.Call"(var Source: Record "MDS Source"; var ContentStream: InStream) IsConnected: Boolean
+    begin
+        TestSetup();
+        InitInterface("Get.Type"());
+        if IDataProvider.SetDataProvider("Get.No"(true)) then
+            IsConnected := IDataProvider.Call(Source, ContentStream);
     end;
 
     local procedure InitInterface(Type: Enum "MDS Data Provider Type")

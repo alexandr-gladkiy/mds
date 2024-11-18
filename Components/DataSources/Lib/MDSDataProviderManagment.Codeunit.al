@@ -27,8 +27,6 @@ codeunit 50103 "MDS Data Provider Managment"
 
     end;
 
-
-
     procedure "DataProvider.CreateOrModify.Single"(DataProvider: Record "MDS Data Provider"; RunTrigger: Boolean) RecordId: RecordId
     begin
         if GlobalDataProvider.Get(DataProvider."No.") then begin
@@ -53,5 +51,7 @@ codeunit 50103 "MDS Data Provider Managment"
                 RecordIdList.Add(RecordId);
             until DataProviderBuffer.Next() = 0;
     end;
+
+
 
 }

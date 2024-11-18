@@ -24,6 +24,10 @@ table 50103 "MDS Source"
         {
             Caption = 'Status';
         }
+        field(10; "Query String"; Text[250])
+        {
+            Caption = 'Query String';
+        }
     }
     keys
     {
