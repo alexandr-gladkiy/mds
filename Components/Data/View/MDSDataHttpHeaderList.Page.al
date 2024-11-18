@@ -1,11 +1,11 @@
 namespace mds.mds;
 
-page 50109 "MDS Source Http Header List"
+page 50109 "MDS Data Http Header List"
 {
     ApplicationArea = All;
     Caption = 'Source Http Header List';
     PageType = List;
-    SourceTable = "MDS Source Http Header";
+    SourceTable = "MDS Data Http Header";
     DelayedInsert = true;
 
     layout

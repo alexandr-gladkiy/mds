@@ -62,7 +62,7 @@ page 50103 "MDS Role Center"
                 action("Source")
                 {
                     Caption = 'Source';
-                    RunObject = page "MDS Source List";
+                    RunObject = page "MDS Data Request Config List";
                     RunPageMode = Edit;
                 }
             }

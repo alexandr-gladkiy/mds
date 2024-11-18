@@ -1,9 +1,9 @@
-table 50103 "MDS Source"
+table 50103 "MDS Data Request Config"
 {
     Caption = 'Source';
     DataClassification = CustomerContent;
-    DrillDownPageId = "MDS Source List";
-    LookupPageId = "MDS Source List";
+    DrillDownPageId = "MDS Data Request Config List";
+    LookupPageId = "MDS Data Request Config List";
 
     fields
     {
@@ -42,7 +42,7 @@ table 50103 "MDS Source"
     }
 
     var
-        SourceMgt: Codeunit "MDS Source Management";
+        mData: Codeunit "MDS Data Managment";
 
     trigger OnInsert()
     var
@@ -50,7 +50,7 @@ table 50103 "MDS Source"
     begin
         OnBeforeOnInsert(Rec, IsHandled);
         if not IsHandled then
-            SourceMgt."Source.OnInsert"(Rec);
+            mData."DataRequestConfig.OnInsert"(Rec);
         OnAfterOnInsert(Rec, IsHandled)
     end;
 
@@ -60,7 +60,7 @@ table 50103 "MDS Source"
     begin
         OnBeforeOnModify(Rec, xRec, IsHandled);
         if not IsHandled then
-            SourceMgt."Source.OnModify"(Rec, xRec);
+            mData."DataRequestConfig.OnModify"(Rec, xRec);
         OnAfterOnModify(Rec, xRec, IsHandled);
     end;
 
@@ -70,7 +70,7 @@ table 50103 "MDS Source"
     begin
         OnBeforeOnDelete(Rec, IsHandled);
         if not IsHandled then
-            SourceMgt."Source.OnDelete"(Rec);
+            mData."DataRequestConfig.OnDelete"(Rec);
         OnAfterOnDelete(Rec, IsHandled);
     end;
 
@@ -80,54 +80,54 @@ table 50103 "MDS Source"
     begin
         OnBeforeOnRename(Rec, xRec, IsHandled);
         if not IsHandled then
-            SourceMgt."Source.OnRename"(Rec, xRec);
+            mData."DataRequestConfig.OnRename"(Rec, xRec);
         OnAfterOnRename(Rec, xRec, IsHandled);
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnBeforeOnInsert(var Rec: Record "MDS Source"; IsHandled: Boolean)
+    local procedure OnBeforeOnInsert(var Rec: Record "MDS Data Request Config"; IsHandled: Boolean)
     begin
 
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnAfterOnInsert(var Rec: Record "MDS Source"; IsHandled: Boolean)
+    local procedure OnAfterOnInsert(var Rec: Record "MDS Data Request Config"; IsHandled: Boolean)
     begin
 
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnBeforeOnModify(var Rec: Record "MDS Source"; xRec: Record "MDS Source"; IsHandled: Boolean)
+    local procedure OnBeforeOnModify(var Rec: Record "MDS Data Request Config"; xRec: Record "MDS Data Request Config"; IsHandled: Boolean)
     begin
 
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnAfterOnModify(var Rec: Record "MDS Source"; xRec: Record "MDS Source"; IsHandled: Boolean)
+    local procedure OnAfterOnModify(var Rec: Record "MDS Data Request Config"; xRec: Record "MDS Data Request Config"; IsHandled: Boolean)
     begin
 
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnBeforeOnDelete(var Rec: Record "MDS Source"; IsHandled: Boolean)
+    local procedure OnBeforeOnDelete(var Rec: Record "MDS Data Request Config"; IsHandled: Boolean)
     begin
 
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnAfterOnDelete(var Rec: Record "MDS Source"; IsHandled: Boolean)
+    local procedure OnAfterOnDelete(var Rec: Record "MDS Data Request Config"; IsHandled: Boolean)
     begin
 
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnBeforeOnRename(var Rec: Record "MDS Source"; xRec: Record "MDS Source"; IsHandled: Boolean)
+    local procedure OnBeforeOnRename(var Rec: Record "MDS Data Request Config"; xRec: Record "MDS Data Request Config"; IsHandled: Boolean)
     begin
 
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnAfterOnRename(var Rec: Record "MDS Source"; xRec: Record "MDS Source"; IsHandled: Boolean)
+    local procedure OnAfterOnRename(var Rec: Record "MDS Data Request Config"; xRec: Record "MDS Data Request Config"; IsHandled: Boolean)
     begin
 
     end;

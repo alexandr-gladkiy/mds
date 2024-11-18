@@ -7,8 +7,6 @@ codeunit 50108 "MDS Website Impl." implements "MDS IData Provider"
 
     var
         sDataProvider: Codeunit "MDS Data Provider Service";
-        HttpHelper: Codeunit "MDS Http Helper";
-        HttpMethod: Enum "Http Method";
 
     procedure SetDataProvider(DataProviderNo: Code[20]): Boolean
     begin
@@ -42,7 +40,7 @@ codeunit 50108 "MDS Website Impl." implements "MDS IData Provider"
         end;
     end;
 
-    procedure Call(var Source: Record "MDS Source"; var ContentStream: InStream): Boolean
+    procedure Call(var Source: Record "MDS Data Request Config"; var ContentStream: InStream): Boolean
     var
     begin
 

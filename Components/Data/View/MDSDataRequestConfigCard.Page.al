@@ -1,21 +1,21 @@
 namespace mds.mds;
 
-page 50105 "MDS Source List"
+page 50106 "MDS Data Request Config Card"
 {
     ApplicationArea = All;
-    Caption = 'Source List';
-    PageType = List;
-    SourceTable = "MDS Source";
-    UsageCategory = Lists;
+    Caption = 'Data Request Config Card';
+    PageType = Card;
+    SourceTable = "MDS Data Request Config";
     DelayedInsert = true;
-    CardPageId = "MDS Source Card";
 
     layout
     {
         area(Content)
         {
-            repeater(General)
+            group(General)
             {
+                Caption = 'General';
+
                 field("No."; Rec."No.")
                 {
                     ToolTip = 'Specifies the value of the No. field.', Comment = '%';
@@ -35,4 +35,20 @@ page 50105 "MDS Source List"
             }
         }
     }
+    actions
+    {
+        area(Processing)
+        {
+            action("Call")
+            {
+                trigger OnAction()
+                begin
+                    sSource.Call(Rec);
+                end;
+            }
+        }
+    }
+
+    var
+        sSource: Codeunit "MDS Source Service";
 }

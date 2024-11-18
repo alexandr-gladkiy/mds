@@ -1,9 +1,9 @@
-table 50108 "MDS Source Request Link"
+table 50108 "MDS Data Request Link"
 {
     Caption = 'Source Request Link';
     DataClassification = CustomerContent;
-    LookupPageId = "MDS Source Request Links";
-    DrillDownPageId = "MDS Source Request Links";
+    LookupPageId = "MDS Data Request Link List";
+    DrillDownPageId = "MDS Data Request Link List";
 
     fields
     {

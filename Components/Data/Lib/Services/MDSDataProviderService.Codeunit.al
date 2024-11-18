@@ -117,7 +117,7 @@ codeunit 50104 "MDS Data Provider Service"
         IsSet := IDataProvider.SetDataProvider("Get.No"(true));
     end;
 
-    procedure "Impl.Call"(var Source: Record "MDS Source"; var ContentStream: InStream) IsConnected: Boolean
+    procedure "Impl.Call"(var Source: Record "MDS Data Request Config"; var ContentStream: InStream) IsConnected: Boolean
     begin
         TestSetup();
         InitInterface("Get.Type"());

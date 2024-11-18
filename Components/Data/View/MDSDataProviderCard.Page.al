@@ -56,12 +56,6 @@ page 50107 "MDS Data Provider Card"
                     ToolTip = 'Specifies the value of the Web Sitemap Url field.', Comment = '%';
                 }
             }
-
-            part("Http Headers"; "MDS Source Http Header LPart")
-            {
-                Caption = 'Http Headers';
-                SubPageLink = "Data Povider No." = field("No."), "Source No." = filter('');
-            }
         }
     }
     actions

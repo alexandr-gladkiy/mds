@@ -1,9 +1,9 @@
-table 50105 "MDS Source Http Header"
+table 50105 "MDS Data Http Header"
 {
     Caption = 'Data Source Http Header';
     DataClassification = CustomerContent;
-    LookupPageId = "MDS Source Http Header List";
-    DrillDownPageId = "MDS Source Http Header List";
+    LookupPageId = "MDS Data Http Header List";
+    DrillDownPageId = "MDS Data Http Header List";
 
     fields
     {
@@ -34,7 +34,7 @@ table 50105 "MDS Source Http Header"
 
 
     var
-        SourceMgt: Codeunit "MDS Source Management";
+        mData: Codeunit "MDS Data Managment";
 
     trigger OnInsert()
     var
@@ -42,7 +42,7 @@ table 50105 "MDS Source Http Header"
     begin
         OnBeforeOnInsert(Rec, IsHandled);
         if not IsHandled then
-            SourceMgt."SourceHttpHeader.OnInsert"(Rec);
+            mData."DataHttpHeader.OnInsert"(Rec);
         OnAfterOnInsert(Rec, IsHandled)
     end;
 
@@ -52,7 +52,7 @@ table 50105 "MDS Source Http Header"
     begin
         OnBeforeOnModify(Rec, xRec, IsHandled);
         if not IsHandled then
-            SourceMgt."SourceHttpHeader.OnModify"(Rec, xRec);
+            mData."DataHttpHeader.OnModify"(Rec, xRec);
         OnAfterOnModify(Rec, xRec, IsHandled);
     end;
 
@@ -62,7 +62,7 @@ table 50105 "MDS Source Http Header"
     begin
         OnBeforeOnDelete(Rec, IsHandled);
         if not IsHandled then
-            SourceMgt."SourceHttpHeader.OnDelete"(Rec);
+            mData."DataHttpHeader.OnDelete"(Rec);
         OnAfterOnDelete(Rec, IsHandled);
     end;
 
@@ -72,54 +72,54 @@ table 50105 "MDS Source Http Header"
     begin
         OnBeforeOnRename(Rec, xRec, IsHandled);
         if not IsHandled then
-            SourceMgt."SourceHttpHeader.OnRename"(Rec, xRec);
+            mData."DataHttpHeader.OnRename"(Rec, xRec);
         OnAfterOnRename(Rec, xRec, IsHandled);
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnBeforeOnInsert(var Rec: Record "MDS Source Http Header"; IsHandled: Boolean)
+    local procedure OnBeforeOnInsert(var Rec: Record "MDS Data Http Header"; IsHandled: Boolean)
     begin
 
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnAfterOnInsert(var Rec: Record "MDS Source Http Header"; IsHandled: Boolean)
+    local procedure OnAfterOnInsert(var Rec: Record "MDS Data Http Header"; IsHandled: Boolean)
     begin
 
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnBeforeOnModify(var Rec: Record "MDS Source Http Header"; xRec: Record "MDS Source Http Header"; IsHandled: Boolean)
+    local procedure OnBeforeOnModify(var Rec: Record "MDS Data Http Header"; xRec: Record "MDS Data Http Header"; IsHandled: Boolean)
     begin
 
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnAfterOnModify(var Rec: Record "MDS Source Http Header"; xRec: Record "MDS Source Http Header"; IsHandled: Boolean)
+    local procedure OnAfterOnModify(var Rec: Record "MDS Data Http Header"; xRec: Record "MDS Data Http Header"; IsHandled: Boolean)
     begin
 
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnBeforeOnDelete(var Rec: Record "MDS Source Http Header"; IsHandled: Boolean)
+    local procedure OnBeforeOnDelete(var Rec: Record "MDS Data Http Header"; IsHandled: Boolean)
     begin
 
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnAfterOnDelete(var Rec: Record "MDS Source Http Header"; IsHandled: Boolean)
+    local procedure OnAfterOnDelete(var Rec: Record "MDS Data Http Header"; IsHandled: Boolean)
     begin
 
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnBeforeOnRename(var Rec: Record "MDS Source Http Header"; xRec: Record "MDS Source Http Header"; IsHandled: Boolean)
+    local procedure OnBeforeOnRename(var Rec: Record "MDS Data Http Header"; xRec: Record "MDS Data Http Header"; IsHandled: Boolean)
     begin
 
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnAfterOnRename(var Rec: Record "MDS Source Http Header"; xRec: Record "MDS Source Http Header"; IsHandled: Boolean)
+    local procedure OnAfterOnRename(var Rec: Record "MDS Data Http Header"; xRec: Record "MDS Data Http Header"; IsHandled: Boolean)
     begin
 
     end;

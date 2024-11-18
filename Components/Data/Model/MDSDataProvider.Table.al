@@ -50,7 +50,7 @@ table 50102 "MDS Data Provider"
     }
 
     var
-        DataProviderMgt: Codeunit "MDS Data Provider Managment";
+        mData: Codeunit "MDS Data Managment";
 
     trigger OnInsert()
     var
@@ -58,7 +58,7 @@ table 50102 "MDS Data Provider"
     begin
         OnBeforeOnInsert(Rec, IsHandled);
         if not IsHandled then
-            DataProviderMgt."DataProvider.OnInsert"(Rec);
+            mData."DataProvider.OnInsert"(Rec);
         OnAfterOnInsert(Rec, IsHandled)
     end;
 
@@ -68,7 +68,7 @@ table 50102 "MDS Data Provider"
     begin
         OnBeforeOnModify(Rec, xRec, IsHandled);
         if not IsHandled then
-            DataProviderMgt."DataProvider.OnModify"(Rec, xRec);
+            mData."DataProvider.OnModify"(Rec, xRec);
         OnAfterOnModify(Rec, xRec, IsHandled);
     end;
 
@@ -78,7 +78,7 @@ table 50102 "MDS Data Provider"
     begin
         OnBeforeOnDelete(Rec, IsHandled);
         if not IsHandled then
-            DataProviderMgt."DataProvider.OnDelete"(Rec);
+            mData."DataProvider.OnDelete"(Rec);
         OnAfterOnDelete(Rec, IsHandled);
     end;
 
@@ -88,7 +88,7 @@ table 50102 "MDS Data Provider"
     begin
         OnBeforeOnRename(Rec, xRec, IsHandled);
         if not IsHandled then
-            DataProviderMgt."DataProvider.OnRename"(Rec, xRec);
+            mData."DataProvider.OnRename"(Rec, xRec);
         OnAfterOnRename(Rec, xRec, IsHandled);
     end;
 
