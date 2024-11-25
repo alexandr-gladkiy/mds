@@ -5,25 +5,31 @@ table 50104 "MDS Setup"
 
     fields
     {
-        field(1; "No. Series Data Provider"; Code[20])
+        field(1; "Primary Key"; Integer)
         {
-            Caption = 'No. Series Data Provider';
+            Caption = 'Primary Key';
         }
-        field(2; "No. Series Source"; Code[20])
+        field(2; "Data Provider Serial No."; Code[20])
         {
-            Caption = 'No. Series Source';
+            Caption = 'Data Provider Serial No.';
+            TableRelation = "No. Series".Code;
+        }
+        field(3; "Data Config Serial No."; Code[20])
+        {
+            Caption = 'Data Config Serial No.';
+            TableRelation = "No. Series".Code;
         }
     }
     keys
     {
-        key(PK; "No. Series Data Provider")
+        key(PK; "Data Provider Serial No.")
         {
             Clustered = true;
         }
     }
 
     var
-        SetupMgt: Codeunit "MDS Setup Managment";
+        SetupMgt: Codeunit "MDS Setup Management";
 
     trigger OnInsert()
     var

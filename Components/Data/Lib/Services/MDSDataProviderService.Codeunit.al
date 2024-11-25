@@ -16,6 +16,7 @@ codeunit 50104 "MDS Data Provider Service"
             exit(true);
 
         GlobalIsSetup := GlobalDataProvider.Get(No);
+        exit(GlobalIsSetup);
     end;
 
     procedure "Get.No"(DoTestField: Boolean): Code[20]
@@ -117,12 +118,24 @@ codeunit 50104 "MDS Data Provider Service"
         IsSet := IDataProvider.SetDataProvider("Get.No"(true));
     end;
 
-    procedure "Impl.Call"(var Source: Record "MDS Data Request Config"; var ContentStream: InStream) IsConnected: Boolean
+    procedure "Impl.Call"(var DataRequestConfig: Record "MDS Data Request Config"; var ContentStream: InStream) IsCalled: Boolean
     begin
-        TestSetup();
+        "Set.ByPK"(DataRequestConfig."Data Provider No.");
         InitInterface("Get.Type"());
         if IDataProvider.SetDataProvider("Get.No"(true)) then
-            IsConnected := IDataProvider.Call(Source, ContentStream);
+            IsCalled := IDataProvider.Call(DataRequestConfig, ContentStream);
+    end;
+
+    procedure "Impl.CreateDataRequestLinks"(var DataRequestConfig: Record "MDS Data Request Config"; var ContentStream: InStream) IsCalled: Boolean
+    begin
+        "Set.ByPK"(DataRequestConfig."Data Provider No.");
+        InitInterface("Get.Type"());
+        if not IDataProvider.SetDataProvider("Get.No"(true)) then
+            exit;
+
+        if IDataProvider.Call(DataRequestConfig, ContentStream) then
+            IsCalled := IDataProvider.CreateDataRequestLinks(DataRequestConfig, ContentStream)
+
     end;
 
     local procedure InitInterface(Type: Enum "MDS Data Provider Type")

@@ -1,11 +1,11 @@
 namespace mds.mds;
 
-codeunit 50107 "MDS Setup Managment"
+codeunit 50107 "MDS Setup Management"
 {
     Subtype = Normal;
 
     var
-        GlobalSetup: Record "MDS Setup";
+        Setup: Record "MDS Setup";
 
     procedure "Setup.OnInsert"(var Setup: Record "MDS Setup")
     begin
@@ -25,6 +25,15 @@ codeunit 50107 "MDS Setup Managment"
     procedure "Setup.OnRename"(var Setup: Record "MDS Setup"; xSetup: Record "MDS Setup")
     begin
 
+    end;
+
+    procedure "Create.Setup"(var Setup: Record "MDS Setup"): Boolean
+    begin
+        if Setup.Get() then
+            exit(true);
+
+        Setup.Init();
+        exit(Setup.Insert(true));
     end;
 
 }

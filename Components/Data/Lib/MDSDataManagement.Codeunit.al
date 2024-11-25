@@ -1,16 +1,19 @@
 namespace mds.mds;
+using Microsoft.Foundation.NoSeries;
 
-codeunit 50103 "MDS Data Managment"
+codeunit 50103 "MDS Data Management"
 {
     Subtype = Normal;
 
     var
         GlobalDataProvider: Record "MDS Data Provider";
         GlobalDataRequestConfig: Record "MDS Data Request Config";
+        sSetup: Codeunit "MDS Setup Service";
+
 
     procedure "DataProvider.OnInsert"(var DataProvider: Record "MDS Data Provider")
     begin
-        DataProvider.TestField("No.");
+
     end;
 
     procedure "DataProvider.OnModify"(var DataProvider: Record "MDS Data Provider"; xDataProvider: Record "MDS Data Provider")
@@ -26,6 +29,19 @@ codeunit 50103 "MDS Data Managment"
     procedure "DataProvider.OnRename"(var DataProvider: Record "MDS Data Provider"; xDataProvider: Record "MDS Data Provider")
     begin
 
+    end;
+
+    procedure "DataProvider.OnValidate.No"(var DataProvider: Record "MDS Data Provider"; xDataProvider: Record "MDS Data Provider")
+    begin
+        this.SetNo(DataProvider);
+    end;
+
+    local procedure SetNo(var DataProvider: Record "MDS Data Provider")
+    var
+        NoSeries: Codeunit "No. Series";
+    begin
+        if DataProvider."No." = '' then
+            DataProvider."No." := NoSeries.GetNextNo(this.sSetup."Get.SerialNo.DataProvider"());
     end;
 
     procedure "DataProvider.CreateOrModify.Single"(DataProvider: Record "MDS Data Provider"; RunTrigger: Boolean) RecordId: RecordId

@@ -34,7 +34,7 @@ table 50105 "MDS Data Http Header"
 
 
     var
-        mData: Codeunit "MDS Data Managment";
+        mData: Codeunit "MDS Data Management";
 
     trigger OnInsert()
     var

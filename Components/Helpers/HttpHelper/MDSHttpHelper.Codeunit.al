@@ -64,5 +64,26 @@ codeunit 50109 "MDS Http Helper"
         exit(ContentBlob.HasValue());
     end;
 
+    procedure GetRequestUriPath(URL: Text) UriPath: Text
+    var
+        cUri: Codeunit Uri;
+        Scheme: Text;
+        Host: Text;
+        SegmentList: List of [Text];
+        Segments: Text;
+        NumberOfSegments: Integer;
+        index: Integer;
+    begin
+        if URL = '' then
+            exit;
 
+        cUri.Init(URL);
+        Scheme := cUri.GetScheme() + '://';
+        Host := cUri.GetHost();
+        cUri.GetSegments(SegmentList);
+        NumberOfSegments := SegmentList.Count;
+        for index := 1 to NumberOfSegments - 1 do
+            Segments += SegmentList.Get(index);
+        UriPath := Scheme + Host + Segments;
+    end;
 }

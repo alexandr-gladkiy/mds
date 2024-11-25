@@ -1,13 +1,13 @@
 namespace mds.mds;
 
-codeunit 50106 "MDS Source Service"
+codeunit 50106 "MDS Data Request Conf. Service"
 {
     Subtype = Normal;
 
     var
         GlobalDataRequestConfig: Record "MDS Data Request Config";
-        GlobalIsSetup: Boolean;
         sDataProvider: Codeunit "MDS Data Provider Service";
+        GlobalIsSetup: Boolean;
 
     procedure "Set.ByPK"(No: Code[20]): Boolean
     begin
@@ -91,11 +91,15 @@ codeunit 50106 "MDS Source Service"
         ContentStream: InStream;
         FileName: Text;
     begin
-        sDataProvider."Set.ByPK"("Get.DataProviderNo"(true));
-        if not sDataProvider."Impl.Call"(GlobalDataRequestConfig, ContentStream) then
+        if not sDataProvider."Impl.Call"(DataRequestConfig, ContentStream) then
             exit(false);
-
-        DownloadFromStream(ContentStream, 'Select folder for download', '', '', FileName);
     end;
 
+    procedure CreateDataRequestLinks(var DataRequestConfig: Record "MDS Data Request Config"): Boolean
+    var
+        ContentStream: InStream;
+    begin
+        if not sDataProvider."Impl.CreateDataRequestLinks"(DataRequestConfig, ContentStream) then
+            exit(false);
+    end;
 }

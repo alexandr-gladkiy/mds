@@ -42,7 +42,7 @@ table 50103 "MDS Data Request Config"
     }
 
     var
-        mData: Codeunit "MDS Data Managment";
+        mData: Codeunit "MDS Data Management";
 
     trigger OnInsert()
     var

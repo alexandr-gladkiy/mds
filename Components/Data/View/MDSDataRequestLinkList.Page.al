@@ -14,7 +14,7 @@ page 50113 "MDS Data Request Link List"
         {
             repeater(General)
             {
-                field("Source No."; Rec."Source No.")
+                field("Source No."; Rec."Config No.")
                 {
                     ToolTip = 'Specifies the value of the Source No. field.', Comment = '%';
                 }
@@ -26,11 +26,11 @@ page 50113 "MDS Data Request Link List"
                 {
                     ToolTip = 'Specifies the value of the Reference No. field.', Comment = '%';
                 }
-                field(Url; Rec.Url)
+                field(Url; Rec."Link Path")
                 {
                     ToolTip = 'Specifies the value of the Url field.', Comment = '%';
                 }
-                field("Url As MD5"; Rec."Url As MD5")
+                field("Url As MD5"; Rec."Link Path As MD5")
                 {
                     ToolTip = 'Specifies the value of the Url As MD5 field.', Comment = '%';
                 }
@@ -42,7 +42,7 @@ page 50113 "MDS Data Request Link List"
                 {
                     ToolTip = 'Specifies the value of the Status field.', Comment = '%';
                 }
-                field("Processing Status"; Rec."Processing Status")
+                field("Processing Status"; Rec."Process Status")
                 {
                     ToolTip = 'Specifies the value of the Processing Status field.', Comment = '%';
                 }

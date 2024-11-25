@@ -32,6 +32,10 @@ page 50106 "MDS Data Request Config Card"
                 {
                     ToolTip = 'Specifies the value of the Status field.', Comment = '%';
                 }
+                field("Query String"; Rec."Query String")
+                {
+                    Caption = 'Query String';
+                }
             }
         }
     }
@@ -43,12 +47,26 @@ page 50106 "MDS Data Request Config Card"
             {
                 trigger OnAction()
                 begin
-                    sSource.Call(Rec);
+                    sRequestConfig.Call(Rec);
                 end;
+            }
+
+            action("Create Links")
+            {
+                trigger OnAction()
+                begin
+                    sRequestConfig.CreateDataRequestLinks(Rec);
+                end;
+            }
+
+            action("Open Links")
+            {
+                RunObject = Page "MDS Data Request Link List";
+                //RunPageLink = "Config No." = field("No.");
             }
         }
     }
 
     var
-        sSource: Codeunit "MDS Source Service";
+        sRequestConfig: Codeunit "MDS Data Request Conf. Service";
 }

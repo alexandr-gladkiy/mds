@@ -10,6 +10,7 @@ table 50102 "MDS Data Provider"
         field(1; "No."; Code[20])
         {
             Caption = 'No.';
+            NotBlank = true;
         }
         field(2; Name; Text[50])
         {
@@ -50,7 +51,7 @@ table 50102 "MDS Data Provider"
     }
 
     var
-        mData: Codeunit "MDS Data Managment";
+        mData: Codeunit "MDS Data Management";
 
     trigger OnInsert()
     var

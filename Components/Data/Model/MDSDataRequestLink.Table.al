@@ -7,9 +7,9 @@ table 50108 "MDS Data Request Link"
 
     fields
     {
-        field(1; "Source No."; Code[20])
+        field(1; "Config No."; Code[20])
         {
-            Caption = 'Source No.';
+            Caption = 'Config No.';
         }
         field(2; "Link ID"; Integer)
         {
@@ -19,11 +19,11 @@ table 50108 "MDS Data Request Link"
         {
             Caption = 'Reference No.';
         }
-        field(4; Url; Text[1024])
+        field(4; "Link Path"; Text[1024])
         {
             Caption = 'Url';
         }
-        field(5; "Url As MD5"; Text[32])
+        field(5; "Link Path As MD5"; Text[32])
         {
             Caption = 'Url As MD5';
         }
@@ -35,18 +35,30 @@ table 50108 "MDS Data Request Link"
         {
             Caption = 'Status';
         }
-        field(8; "Processing Status"; Integer)
+        field(8; "Process Status"; Enum "MDS Process Status")
         {
-            Caption = 'Processing Status';
+            Caption = 'Process Status';
+        }
+        field(10; "Link Last Modified"; DateTime)
+        {
+            Caption = 'Link Last Modified';
+        }
+        field(11; "Link Change Freq."; DateFormula)
+        {
+            Caption = 'Link Change Freq.';
+        }
+        field(12; "Link Priority"; Integer)
+        {
+            Caption = 'Link Priority';
         }
     }
     keys
     {
-        key(PK; "Source No.", "Link ID")
+        key(PK; "Config No.", "Link ID")
         {
             Clustered = true;
         }
-        key(UK1; "Reference No.", "Url As MD5")
+        key(UK1; "Reference No.", "Link Path As MD5")
         {
             Unique = true;
         }

@@ -16,11 +16,11 @@ page 50108 "MDS Setup Card"
             {
                 Caption = 'General';
 
-                field("No. Series Data Provider"; Rec."No. Series Data Provider")
+                field("No. Series Data Provider"; Rec."Data Provider Serial No.")
                 {
                     ToolTip = 'Specifies the value of the No. Series Data Provider field.', Comment = '%';
                 }
-                field("No. Series Source"; Rec."No. Series Source")
+                field("No. Series Source"; Rec."Data Config Serial No.")
                 {
                     ToolTip = 'Specifies the value of the No. Series Source field.', Comment = '%';
                 }
