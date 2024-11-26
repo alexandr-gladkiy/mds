@@ -56,6 +56,10 @@ table 50108 "MDS Data Request Link"
         {
             Caption = 'Last Date Time Request';
         }
+        field(20; "Blob Key"; BigInteger)
+        {
+            Caption = 'Blob Key';
+        }
         field(100; "Config Name"; Text[100])
         {
             Caption = 'Config Name';

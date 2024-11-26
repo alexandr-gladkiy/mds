@@ -227,8 +227,6 @@ codeunit 50108 "MDS Website Impl." implements "MDS IData Provider"
             exit(DataRequestLinkBuffer."Link ID")
     end;
 
-
-
     procedure DownloadContentRequestLink(var DataRequestLink: Record "MDS Data Request Link") IsDownloaded: Boolean
     var
         IsHandled: Boolean;
@@ -240,7 +238,26 @@ codeunit 50108 "MDS Website Impl." implements "MDS IData Provider"
     end;
 
     local procedure DownloadContent(var DataRequestLink: Record "MDS Data Request Link") IsDownloaded: Boolean
+    var
+        hPersistentBlob: Codeunit "MDS Persistent Blob Helper";
+        IStream: InStream;
     begin
+        Clear(hHttp);
+        DataRequestLink.TestField("Link Path");
+        hHttp."Set.Method"("Http Method"::GET);
+        hHttp."Set.Url"(DataRequestLink."Link Path");
+        IsDownloaded := hHttp.Call();
+        if not IsDownloaded then begin
+            DataRequestLink."Process Status" := DataRequestLink."Process Status"::Error;
+            //TODO: add Error message field to data request link
+            DataRequestLink."Request Last Datetime" := CreateDateTime(Today(), Time());
+        end;
+
+        hHttp."Get.Content.As.Stream"(IStream);
+        hPersistentBlob."Upload.AsStream"(IStream, DataRequestLink."Blob Key");
+        DataRequestLink."Process Status" := DataRequestLink."Process Status"::Downloaded;
+        DataRequestLink."Request Last Datetime" := CreateDateTime(Today(), Time());
+        DataRequestLink.Modify(false);
 
     end;
 

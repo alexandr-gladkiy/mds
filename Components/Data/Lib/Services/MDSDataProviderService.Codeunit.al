@@ -6,6 +6,7 @@ codeunit 50104 "MDS Data Provider Service"
 
     var
         GlobalDataProvider: Record "MDS Data Provider"; //TODO: переделать на DataProvider, обращения переписать через this.
+        sDataRequestConfig: Codeunit "MDS Data Request Conf. Service";
         IDataProvider: Interface "MDS IData Provider";
         IDataProviderIsInit: Boolean;
         GlobalIsSetup: Boolean;
@@ -135,7 +136,14 @@ codeunit 50104 "MDS Data Provider Service"
 
         if IDataProvider.Call(DataRequestConfig, ContentStream) then
             IsCalled := IDataProvider.CreateRequestLinks(DataRequestConfig, ContentStream)
+    end;
 
+    procedure "Impl.DownloadContentRequestLink"(var DataRequestLink: Record "MDS Data Request Link"): Boolean
+    begin
+        sDataRequestConfig."Set.ByPK"(DataRequestLink."Config No.");
+        "Set.ByPK"(sDataRequestConfig."Get.DataProviderNo"(true));
+        InitInterface("Get.Type"());
+        exit(IDataProvider.DownloadContentRequestLink(DataRequestLink))
     end;
 
     local procedure InitInterface(Type: Enum "MDS Data Provider Type")

@@ -32,6 +32,10 @@ page 50106 "MDS Data Request Config Card"
                 {
                     ToolTip = 'Specifies the value of the Data Provider Name field.', Comment = '%';
                 }
+                field("Data Provider Type"; Rec."Data Provider Type")
+                {
+                    ToolTip = 'Specifies the value of the Data Provider Type field.', Comment = '%';
+                }
                 field(Status; Rec.Status)
                 {
                     ToolTip = 'Specifies the value of the Status field.', Comment = '%';
@@ -71,10 +75,20 @@ page 50106 "MDS Data Request Config Card"
                 end;
             }
 
+            action("Download Request Content")
+            {
+                trigger OnAction()
+                begin
+                    sRequestConfig.DownloadRequestContent(Rec);
+                end;
+            }
+        }
+        area(Navigation)
+        {
             action("Open Links")
             {
                 RunObject = Page "MDS Data Request Link List";
-                //RunPageLink = "Config No." = field("No.");
+                RunPageLink = "Config No." = field("No.");
             }
         }
     }

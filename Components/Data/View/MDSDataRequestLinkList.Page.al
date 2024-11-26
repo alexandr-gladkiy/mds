@@ -53,10 +53,30 @@ page 50113 "MDS Data Request Link List"
                 {
                     ToolTip = 'Specifies the value of the Processing Status field.', Comment = '%';
                 }
+                field("Blob Key"; Rec."Blob Key")
+                {
+                    ToolTip = 'Specifies the value of the Blob Key field.', Comment = '%';
+                }
                 field("Request Last Datetime"; Rec."Request Last Datetime")
                 {
                     ToolTip = 'Specifies the value of the Request Last Datetime field.', Comment = '%';
                 }
+            }
+        }
+    }
+    actions
+    {
+        area(Processing)
+        {
+            action("Download Content")
+            {
+                trigger OnAction()
+                var
+                    hPersistentBlob: Codeunit "MDS Persistent Blob Helper";
+                begin
+                    Rec.TestField("Blob Key");
+                    hPersistentBlob."Download.ToFile"(Rec."Blob Key", StrSubstNo('Content_%1.html', Rec."Blob Key"));
+                end;
             }
         }
     }

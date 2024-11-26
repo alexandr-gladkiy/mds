@@ -48,6 +48,13 @@ table 50103 "MDS Data Request Config"
             FieldClass = FlowField;
             CalcFormula = lookup("MDS Data Provider"."Web Base URL" where("No." = field("Data Provider No.")));
         }
+        field(102; "Data Provider Type"; Enum "MDS Data Provider Type")
+        {
+            Caption = 'Data Provider Type';
+            Editable = false;
+            FieldClass = FlowField;
+            CalcFormula = lookup("MDS Data Provider".Type where("No." = field("Data Provider No.")));
+        }
     }
     keys
     {

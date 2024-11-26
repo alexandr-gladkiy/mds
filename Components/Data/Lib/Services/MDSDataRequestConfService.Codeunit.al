@@ -7,6 +7,7 @@ codeunit 50106 "MDS Data Request Conf. Service"
     var
         GlobalDataRequestConfig: Record "MDS Data Request Config";
         sDataProvider: Codeunit "MDS Data Provider Service";
+        sDataRequestLink: Codeunit "MDS Data Request Link Service";
         GlobalIsSetup: Boolean;
 
     procedure "Set.ByPK"(No: Code[20]): Boolean
@@ -110,5 +111,22 @@ codeunit 50106 "MDS Data Request Conf. Service"
             exit(false);
     end;
 
+    procedure DownloadRequestContent(var DataRequestConfig: Record "MDS Data Request Config"): Boolean
+    var
+        DataRequestLinkBuffer: Record "MDS Data Request Link" temporary;
+        Limit: Integer;
+        I: Integer;
+    begin
+        if not sDataRequestLink."InitBuffer.Active.Open"(DataRequestConfig."No.", DataRequestLinkBuffer) then
+            exit(false);
+
+        Limit := 10;
+        DataRequestLinkBuffer.FindSet(true);
+        repeat
+            if sDataProvider."Impl.DownloadContentRequestLink"(DataRequestLinkBuffer) then
+                I += 1;
+        until (I > 10) or (DataRequestLinkBuffer.Next() = 0);
+        sDataRequestLink.CreateOrModify(DataRequestLinkBuffer)
+    end;
 
 }
