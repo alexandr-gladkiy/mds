@@ -16,7 +16,7 @@ codeunit 50112 "MDS Setup Service"
         exit(this.Setup."Data Provider Serial No.");
     end;
 
-    procedure "Get.SerialNo.DataConfig"(): Code[20]
+    procedure "Get.SerialNo.DataRequestConfig"(): Code[20]
     begin
         this."Get.Setup"();
         this.Setup.TestField("Data Config Serial No.");

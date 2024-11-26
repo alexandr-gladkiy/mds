@@ -8,6 +8,7 @@ codeunit 50103 "MDS Data Management"
     var
         GlobalDataProvider: Record "MDS Data Provider";
         GlobalDataRequestConfig: Record "MDS Data Request Config";
+        DataRequestLink: Record "MDS Data Request Link";
         sSetup: Codeunit "MDS Setup Service";
 
 
@@ -33,10 +34,10 @@ codeunit 50103 "MDS Data Management"
 
     procedure "DataProvider.OnValidate.No"(var DataProvider: Record "MDS Data Provider"; xDataProvider: Record "MDS Data Provider")
     begin
-        this.SetNo(DataProvider);
+        this."Set.DataProvider.No"(DataProvider);
     end;
 
-    local procedure SetNo(var DataProvider: Record "MDS Data Provider")
+    local procedure "Set.DataProvider.No"(var DataProvider: Record "MDS Data Provider")
     var
         NoSeries: Codeunit "No. Series";
     begin
@@ -90,6 +91,19 @@ codeunit 50103 "MDS Data Management"
 
     end;
 
+    procedure "DataRequestConfig.OnValidate.No"(var DataRequestConfig: Record "MDS Data Request Config"; xDataRequestConfig: Record "MDS Data Request Config")
+    begin
+        this."Set.DataRequestConfig.No"(DataRequestConfig);
+    end;
+
+    local procedure "Set.DataRequestConfig.No"(var DataRequestConfig: Record "MDS Data Request Config")
+    var
+        NoSeries: Codeunit "No. Series";
+    begin
+        if DataRequestConfig."No." = '' then
+            DataRequestConfig."No." := NoSeries.GetNextNo(this.sSetup."Get.SerialNo.DataRequestConfig"());
+    end;
+
     procedure "DataRequestConfig.CreateOrModify.Single"(DataRequestConfig: Record "MDS Data Request Config"; RunTrigger: Boolean) RecordId: RecordId
     begin
         if GlobalDataRequestConfig.Get(DataRequestConfig."No.") then begin
@@ -134,6 +148,57 @@ codeunit 50103 "MDS Data Management"
     procedure "DataHttpHeader.OnRename"(var DataHttpHeader: Record "MDS Data Http Header"; xDataHttpHeader: Record "MDS Data Http Header")
     begin
 
+    end;
+
+
+
+    procedure "DataRequestLink.OnInsert"(var DataRequestLink: Record "MDS Data Request Link")
+    begin
+
+    end;
+
+    procedure "DataRequestLink.OnModify"(var DataRequestLink: Record "MDS Data Request Link"; xDataRequestLink: Record "MDS Data Request Link")
+    begin
+
+    end;
+
+    procedure "DataRequestLink.OnDelete"(var DataRequestLink: Record "MDS Data Request Link")
+    begin
+
+    end;
+
+    procedure "DataRequestLink.OnRename"(var DataRequestLink: Record "MDS Data Request Link"; xDataRequestLink: Record "MDS Data Request Link")
+    begin
+
+    end;
+
+    procedure "DataRequestLink.CreateOrModify.List"(var DataRequestLinkBuffer: Record "MDS Data Request Link"; RunTrigger: Boolean) RecordIdList: List of [RecordId]
+    var
+        RecordId: RecordId;
+    begin
+        if DataRequestLinkBuffer.IsEmpty() then
+            exit;
+
+        DataRequestLinkBuffer.FindSet(false);
+        repeat
+            RecordId := this."DataRequestLink.CreateOrModify.Single"(DataRequestLinkBuffer, RunTrigger);
+            RecordIdList.Add(RecordId);
+
+        until DataRequestLinkBuffer.Next() = 0;
+    end;
+
+    procedure "DataRequestLink.CreateOrModify.Single"(DataRequestLink: Record "MDS Data Request Link"; RunTrigger: Boolean) RecordId: RecordId
+    begin
+        if this.DataRequestLink.Get(DataRequestLink."Config No.", DataRequestLink."Link ID") then begin
+            this.DataRequestLink.TransferFields(DataRequestLink, false);
+            this.DataRequestLink.Modify(RunTrigger);
+        end else begin
+            this.DataRequestLink.Init();
+            this.DataRequestLink.TransferFields(DataRequestLink, true);
+            this.DataRequestLink.Insert(RunTrigger);
+        end;
+
+        RecordId := this.DataRequestLink.RecordId;
     end;
 
 }

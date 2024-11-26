@@ -28,6 +28,10 @@ page 50105 "MDS Data Request Config List"
                 {
                     ToolTip = 'Specifies the value of the Data Provider No. field.', Comment = '%';
                 }
+                field("Data Provider Name"; Rec."Data Provider Name")
+                {
+                    ToolTip = 'Specifies the value of the Data Provider Name field.', Comment = '%';
+                }
                 field(Status; Rec.Status)
                 {
                     ToolTip = 'Specifies the value of the Status field.', Comment = '%';

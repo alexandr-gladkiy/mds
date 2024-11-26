@@ -28,13 +28,25 @@ page 50106 "MDS Data Request Config Card"
                 {
                     ToolTip = 'Specifies the value of the Data Provider No. field.', Comment = '%';
                 }
+                field("Data Provider Name"; Rec."Data Provider Name")
+                {
+                    ToolTip = 'Specifies the value of the Data Provider Name field.', Comment = '%';
+                }
                 field(Status; Rec.Status)
                 {
                     ToolTip = 'Specifies the value of the Status field.', Comment = '%';
                 }
+                field("Data Provider Base Url"; Rec."Data Provider Base Url")
+                {
+                    ToolTip = 'Specifies the value of the Data Provider Base Url field.', Comment = '%';
+                }
                 field("Query String"; Rec."Query String")
                 {
-                    Caption = 'Query String';
+                    ToolTip = 'Specifies the value of the Query String field.', Comment = '%';
+                }
+                field("Regex Filter URL"; Rec."Regex Filter URL")
+                {
+                    ToolTip = 'Specifies the value of the Regex Filter URL field.', Comment = '%';
                 }
             }
         }

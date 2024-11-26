@@ -17,14 +17,11 @@ page 50113 "MDS Data Request Link List"
                 field("Source No."; Rec."Config No.")
                 {
                     ToolTip = 'Specifies the value of the Source No. field.', Comment = '%';
+                    Visible = false;
                 }
                 field("Link ID"; Rec."Link ID")
                 {
                     ToolTip = 'Specifies the value of the Link ID field.', Comment = '%';
-                }
-                field("Reference No."; Rec."Reference No.")
-                {
-                    ToolTip = 'Specifies the value of the Reference No. field.', Comment = '%';
                 }
                 field(Url; Rec."Link Path")
                 {
@@ -33,6 +30,11 @@ page 50113 "MDS Data Request Link List"
                 field("Url As MD5"; Rec."Link Path As MD5")
                 {
                     ToolTip = 'Specifies the value of the Url As MD5 field.', Comment = '%';
+                    Visible = false;
+                }
+                field("Reference No."; Rec."Reference No.")
+                {
+                    ToolTip = 'Specifies the value of the Reference No. field.', Comment = '%';
                 }
                 field(GTIN; Rec.GTIN)
                 {

@@ -22,6 +22,7 @@ table 50108 "MDS Data Request Link"
         field(4; "Link Path"; Text[1024])
         {
             Caption = 'Url';
+            ExtendedDatatype = URL;
         }
         field(5; "Link Path As MD5"; Text[32])
         {
@@ -35,7 +36,7 @@ table 50108 "MDS Data Request Link"
         {
             Caption = 'Status';
         }
-        field(8; "Process Status"; Enum "MDS Process Status")
+        field(8; "Process Status"; Enum "MDS Data Request Processing Status")
         {
             Caption = 'Process Status';
         }
@@ -63,4 +64,99 @@ table 50108 "MDS Data Request Link"
             Unique = true;
         }
     }
+    fieldgroups
+    {
+        fieldgroup(DrawDown; "Config No.", "Link ID", "Link Path", "Reference No.", Status) { }
+    }
+
+    var
+        mData: Codeunit "MDS Data Management";
+
+    trigger OnInsert()
+    var
+        IsHandled: Boolean;
+    begin
+        OnBeforeOnInsert(Rec, IsHandled);
+        if not IsHandled then
+            mData."DataRequestLink.OnInsert"(Rec);
+        OnAfterOnInsert(Rec, IsHandled)
+    end;
+
+    trigger OnModify()
+    var
+        IsHandled: Boolean;
+    begin
+        OnBeforeOnModify(Rec, xRec, IsHandled);
+        if not IsHandled then
+            mData."DataRequestLink.OnModify"(Rec, xRec);
+        OnAfterOnModify(Rec, xRec, IsHandled);
+    end;
+
+    trigger OnDelete()
+    var
+        IsHandled: Boolean;
+    begin
+        OnBeforeOnDelete(Rec, IsHandled);
+        if not IsHandled then
+            mData."DataRequestLink.OnDelete"(Rec);
+        OnAfterOnDelete(Rec, IsHandled);
+    end;
+
+    trigger OnRename()
+    var
+        IsHandled: Boolean;
+    begin
+        OnBeforeOnRename(Rec, xRec, IsHandled);
+        if not IsHandled then
+            mData."DataRequestLink.OnRename"(Rec, xRec);
+        OnAfterOnRename(Rec, xRec, IsHandled);
+    end;
+
+    [IntegrationEvent(false, false)]
+    local procedure OnBeforeOnInsert(var Rec: Record "MDS Data Request Link"; IsHandled: Boolean)
+    begin
+
+    end;
+
+    [IntegrationEvent(false, false)]
+    local procedure OnAfterOnInsert(var Rec: Record "MDS Data Request Link"; IsHandled: Boolean)
+    begin
+
+    end;
+
+    [IntegrationEvent(false, false)]
+    local procedure OnBeforeOnModify(var Rec: Record "MDS Data Request Link"; xRec: Record "MDS Data Request Link"; IsHandled: Boolean)
+    begin
+
+    end;
+
+    [IntegrationEvent(false, false)]
+    local procedure OnAfterOnModify(var Rec: Record "MDS Data Request Link"; xRec: Record "MDS Data Request Link"; IsHandled: Boolean)
+    begin
+
+    end;
+
+    [IntegrationEvent(false, false)]
+    local procedure OnBeforeOnDelete(var Rec: Record "MDS Data Request Link"; IsHandled: Boolean)
+    begin
+
+    end;
+
+    [IntegrationEvent(false, false)]
+    local procedure OnAfterOnDelete(var Rec: Record "MDS Data Request Link"; IsHandled: Boolean)
+    begin
+
+    end;
+
+    [IntegrationEvent(false, false)]
+    local procedure OnBeforeOnRename(var Rec: Record "MDS Data Request Link"; xRec: Record "MDS Data Request Link"; IsHandled: Boolean)
+    begin
+
+    end;
+
+    [IntegrationEvent(false, false)]
+    local procedure OnAfterOnRename(var Rec: Record "MDS Data Request Link"; xRec: Record "MDS Data Request Link"; IsHandled: Boolean)
+    begin
+
+    end;
 }

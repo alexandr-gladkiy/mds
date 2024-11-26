@@ -55,6 +55,14 @@ codeunit 50106 "MDS Data Request Conf. Service"
         exit(GlobalDataRequestConfig."Query String");
     end;
 
+    procedure "Get.RegexFilterURL"(DoTestField: Boolean): Text[250]
+    begin
+        TestSetup();
+        if DoTestField then
+            GlobalDataRequestConfig.TestField("Regex Filter URL");
+        exit(GlobalDataRequestConfig."Regex Filter URL");
+    end;
+
     procedure IsSet(): Boolean
     begin
         exit(GlobalIsSetup);
@@ -89,7 +97,6 @@ codeunit 50106 "MDS Data Request Conf. Service"
     procedure Call(var DataRequestConfig: Record "MDS Data Request Config"): Boolean
     var
         ContentStream: InStream;
-        FileName: Text;
     begin
         if not sDataProvider."Impl.Call"(DataRequestConfig, ContentStream) then
             exit(false);
@@ -102,4 +109,6 @@ codeunit 50106 "MDS Data Request Conf. Service"
         if not sDataProvider."Impl.CreateDataRequestLinks"(DataRequestConfig, ContentStream) then
             exit(false);
     end;
+
+
 }

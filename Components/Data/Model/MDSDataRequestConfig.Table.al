@@ -28,6 +28,24 @@ table 50103 "MDS Data Request Config"
         {
             Caption = 'Query String';
         }
+        field(11; "Regex Filter URL"; Text[250])
+        {
+            Caption = 'Regex Filter URL';
+        }
+        field(100; "Data Provider Name"; Text[50])
+        {
+            Caption = 'Data Provider Name';
+            Editable = false;
+            FieldClass = FlowField;
+            CalcFormula = lookup("MDS Data Provider".Name where("No." = field("Data Provider No.")));
+        }
+        field(101; "Data Provider Base Url"; Text[250])
+        {
+            Caption = 'Data Provider Base Url';
+            Editable = false;
+            FieldClass = FlowField;
+            CalcFormula = lookup("MDS Data Provider"."Web Base URL" where("No." = field("Data Provider No.")));
+        }
     }
     keys
     {

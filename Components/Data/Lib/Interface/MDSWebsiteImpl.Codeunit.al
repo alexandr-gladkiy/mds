@@ -10,6 +10,9 @@ codeunit 50108 "MDS Website Impl." implements "MDS IData Provider"
 
     var
         sDataProvider: Codeunit "MDS Data Provider Service";
+        sDataRequestConfig: Codeunit "MDS Data Request Conf. Service";
+        sDataRequestLink: Codeunit "MDS Data Request Link Service";
+        mData: Codeunit "MDS Data Management";
         hHttp: Codeunit "MDS Http Helper";
         hHtml: Codeunit "MDS Html Helper";
         hValue: Codeunit "MDS Value Helper";
@@ -27,10 +30,10 @@ codeunit 50108 "MDS Website Impl." implements "MDS IData Provider"
     var
         Client: HttpClient;
         Response: HttpResponseMessage;
-        ConnectionError: Label 'Connection Error! \Status Code: %1 \Error Message: %2';
         Uri: Text;
         ErrorMessage: Text;
         StatusCode: Integer;
+        ConnectionError: Label 'Connection Error! \Status Code: %1 \Error Message: %2', Locked = true;
     begin
         Uri := sDataProvider."Get.WebBaseUrl"(true);
         Client.Get(Uri, Response);
@@ -85,15 +88,16 @@ codeunit 50108 "MDS Website Impl." implements "MDS IData Provider"
 
     local procedure ParseDataRequestContent(var DataRequestConfig: Record "MDS Data Request Config"; var ContentStream: InStream): Boolean
     var
+        DataRequestLinkBuffer: Record "MDS Data Request Link" temporary;
         XmlStream: InStream;
         Document: XmlDocument;
         NodeList: XmlNodeList;
-        DataRequestLinkBuffer: Record "MDS Data Request Link" temporary;
     begin
         XmlStream := hHtml.ConvertHtml2xHtml(ContentStream);
         XmlDocument.ReadFrom(XmlStream, Document);
         NodeList := Document.GetChildNodes();
         ProcessDataRequestContentXmlToBuffer(DataRequestConfig, NodeList, DataRequestLinkBuffer);
+        mData."DataRequestLink.CreateOrModify.List"(DataRequestLinkBuffer, true);
     end;
 
 
@@ -103,7 +107,6 @@ codeunit 50108 "MDS Website Impl." implements "MDS IData Provider"
         Node: XmlNode;
         UrlPath: Text;
     begin
-        // TODO: Refactoring on union table for store content
         foreach Node in Nodes do
             case Node.AsXmlElement().Name of
                 ':loc':
@@ -186,16 +189,17 @@ codeunit 50108 "MDS Website Impl." implements "MDS IData Provider"
         DataRequestLinkBuffer."Config No." := DataRequestConfig."No.";
         DataRequestLinkBuffer."Link Path" := CopyStr(LinkPath, 1, MaxStrLen(DataRequestLinkBuffer."Link Path"));
         DataRequestLinkBuffer."Link Path as MD5" := CopyStr(LinkPathAsMD5, 1, MaxStrLen(DataRequestLinkBuffer."Link Path as MD5"));
-        //DataRequestLinkBuffer."Link Last Modified" := hValue.ConvertDateStringToDateTime(LinkLastModify);
+        //TODO: DataRequestLinkBuffer."Link Last Modified" := hValue.ConvertDateStringToDateTime(LinkLastModify);
         DataRequestLinkBuffer."Link Change Freq." := LinkChangeFreq;
         DataRequestLinkBuffer."Link Priority" := LinkPriority;
-        DataRequestLinkBuffer."Process Status" := DataRequestLinkBuffer."Process Status"::Completed;
-        //if hRegex.IsRegexMatch(LinkPath, GetSiteMapRegexFilter(false)) then begin
-        //     DataRequestLinkBuffer.Status := DataRequestLinkBuffer.Status::Active;
-        //     if IsForSiteMapLinkCall(DataRequestLinkBuffer) then
-        //         DataRequestLinkBuffer."Process Status" := DataRequestLinkBuffer."Process Status"::Open;
-        // end else
-        //     DataRequestLinkBuffer.Status := DataRequestLinkBuffer.Status::Inactive;
+        DataRequestLinkBuffer."Process Status" := DataRequestLinkBuffer."Process Status"::Open;
+        if hRegex.IsRegexMatch(LinkPath, DataRequestConfig."Regex Filter URL") then begin
+            DataRequestLinkBuffer.Status := DataRequestLinkBuffer.Status::Active;
+            DataRequestLinkBuffer."Process Status" := DataRequestLinkBuffer."Process Status"::Open;
+        end else begin
+            DataRequestLinkBuffer.Status := DataRequestLinkBuffer.Status::Inactive;
+            DataRequestLinkBuffer."Process Status" := DataRequestLinkBuffer."Process Status"::Skipped;
+        end;
 
         if Create then
             DataRequestLinkBuffer.Insert(false)
@@ -210,7 +214,7 @@ codeunit 50108 "MDS Website Impl." implements "MDS IData Provider"
         //sCommon.TestEmpty(UrlPath, StrSubstNo(ErrorParameterIsEmpty, 'Url Path'));
         DataRequestConfig.TestField("Data Provider No.");
         sDataProvider."Set.ByPK"(DataRequestConfig."Data Provider No.");
-        UriPath := hHttp.GetRequestUriPath(sDataProvider."Get.WebSitemapURL"(true));
+        UriPath := hHttp.GetRequestUriPath(sDataProvider."Get.WebBaseUrl"(true));
         if UrlPath.StartsWith(UriPath) then
             exit(true);
     end;

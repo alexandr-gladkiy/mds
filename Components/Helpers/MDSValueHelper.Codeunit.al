@@ -7,6 +7,7 @@ codeunit 50110 "MDS Value Helper"
 
     procedure ConvertStringToDateFormula(ChangeFreqText: Text) ChangeFreq: DateFormula
     begin
+        //TODO: Make universal date formula return
         case ChangeFreqText of
             'weekly':
                 Evaluate(ChangeFreq, '1W');
@@ -35,10 +36,10 @@ codeunit 50110 "MDS Value Helper"
     procedure GetValueFromJson(ValueKey: Text; JObject: JsonObject; DoTestValuExist: Boolean): Text
     var
         JToken: JsonToken;
+        TokenExist: Boolean;
         ErrorTokenKeyIsNotValue: Label '%1 is not value';
         ErrorTokenKeyIsNull: Label '%1 is null';
         ErrorTokenKeyNotExist: Label '%1 not exist';
-        TokenExist: Boolean;
     begin
         TokenExist := JObject.Get(ValueKey, JToken);
 
