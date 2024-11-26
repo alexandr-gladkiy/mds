@@ -60,6 +60,10 @@ table 50108 "MDS Data Request Link"
         {
             Caption = 'Blob Key';
         }
+        field(21; "Error Comment"; Text[250])
+        {
+            Caption = 'Error Comment';
+        }
         field(100; "Config Name"; Text[100])
         {
             Caption = 'Config Name';

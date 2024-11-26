@@ -64,6 +64,7 @@ codeunit 50108 "MDS Website Impl." implements "MDS IData Provider"
     var
         URL: Text;
     begin
+        Clear(hHttp);
         DataRequestConfig.TestField("Data Provider No.");
         DataRequestConfig.TestField("Query String");
         sDataProvider."Set.ByPK"(DataRequestConfig."Data Provider No.");
@@ -130,6 +131,7 @@ codeunit 50108 "MDS Website Impl." implements "MDS IData Provider"
         IStream: InStream;
         Content: XmlDocument;
     begin
+        Clear(hHttp);
         // TODO: hHttp.SetEnableErrorMessage(true);
         hHttp."Set.Method"("Http Method"::GET);
         hHttp."Set.Url"(UrlPath);
@@ -244,12 +246,14 @@ codeunit 50108 "MDS Website Impl." implements "MDS IData Provider"
     begin
         Clear(hHttp);
         DataRequestLink.TestField("Link Path");
+        DataRequestLink."Error Comment" := '';
+        
         hHttp."Set.Method"("Http Method"::GET);
         hHttp."Set.Url"(DataRequestLink."Link Path");
         IsDownloaded := hHttp.Call();
         if not IsDownloaded then begin
             DataRequestLink."Process Status" := DataRequestLink."Process Status"::Error;
-            //TODO: add Error message field to data request link
+            DataRequestLink."Error Comment" := CopyStr(hHttp."Get.Response.ReasonPhrase"(), 1, MaxStrLen(DataRequestLink."Error Comment"));
             DataRequestLink."Request Last Datetime" := CreateDateTime(Today(), Time());
         end;
 
@@ -258,7 +262,7 @@ codeunit 50108 "MDS Website Impl." implements "MDS IData Provider"
         DataRequestLink."Process Status" := DataRequestLink."Process Status"::Downloaded;
         DataRequestLink."Request Last Datetime" := CreateDateTime(Today(), Time());
         DataRequestLink.Modify(false);
-
+        Commit();
     end;
 
     [IntegrationEvent(false, false)]

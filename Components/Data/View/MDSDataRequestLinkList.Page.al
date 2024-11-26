@@ -53,6 +53,10 @@ page 50113 "MDS Data Request Link List"
                 {
                     ToolTip = 'Specifies the value of the Processing Status field.', Comment = '%';
                 }
+                field("Error Comment"; Rec."Error Comment")
+                {
+                    ToolTip = 'Specifies the value of the Error Comment field.', Comment = '%';
+                }
                 field("Blob Key"; Rec."Blob Key")
                 {
                     ToolTip = 'Specifies the value of the Blob Key field.', Comment = '%';
