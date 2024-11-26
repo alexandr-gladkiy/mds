@@ -19,6 +19,11 @@ page 50113 "MDS Data Request Link List"
                     ToolTip = 'Specifies the value of the Source No. field.', Comment = '%';
                     Visible = false;
                 }
+                field("Config Name"; Rec."Config Name")
+                {
+                    ToolTip = 'Specifies the value of the Config Name field.', Comment = '%';
+                    Visible = false;
+                }
                 field("Link ID"; Rec."Link ID")
                 {
                     ToolTip = 'Specifies the value of the Link ID field.', Comment = '%';
@@ -47,6 +52,10 @@ page 50113 "MDS Data Request Link List"
                 field("Processing Status"; Rec."Process Status")
                 {
                     ToolTip = 'Specifies the value of the Processing Status field.', Comment = '%';
+                }
+                field("Request Last Datetime"; Rec."Request Last Datetime")
+                {
+                    ToolTip = 'Specifies the value of the Request Last Datetime field.', Comment = '%';
                 }
             }
         }

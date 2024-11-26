@@ -52,6 +52,17 @@ table 50108 "MDS Data Request Link"
         {
             Caption = 'Link Priority';
         }
+        field(13; "Request Last Datetime"; DateTime)
+        {
+            Caption = 'Last Date Time Request';
+        }
+        field(100; "Config Name"; Text[100])
+        {
+            Caption = 'Config Name';
+            Editable = false;
+            FieldClass = FlowField;
+            CalcFormula = lookup("MDS Data Request Config".Name where("No." = field("Config No.")));
+        }
     }
     keys
     {

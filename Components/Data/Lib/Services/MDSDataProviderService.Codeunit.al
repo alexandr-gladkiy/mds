@@ -134,7 +134,7 @@ codeunit 50104 "MDS Data Provider Service"
             exit;
 
         if IDataProvider.Call(DataRequestConfig, ContentStream) then
-            IsCalled := IDataProvider.CreateDataRequestLinks(DataRequestConfig, ContentStream)
+            IsCalled := IDataProvider.CreateRequestLinks(DataRequestConfig, ContentStream)
 
     end;
 

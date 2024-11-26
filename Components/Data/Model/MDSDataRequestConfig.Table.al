@@ -14,11 +14,13 @@ table 50103 "MDS Data Request Config"
         field(2; Name; Text[100])
         {
             Caption = 'Name';
+            NotBlank = true;
         }
         field(3; "Data Provider No."; Code[20])
         {
             Caption = 'Data Provider No.';
             TableRelation = "MDS Data Provider"."No.";
+            NotBlank = true;
         }
         field(4; Status; Enum "MDS Status")
         {

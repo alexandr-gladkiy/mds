@@ -9,11 +9,14 @@ enum 50102 "MDS Data Provider Type" implements "MDS IData Provider"
         Caption = 'Website';
         Implementation = "MDS IData Provider" = "MDS Website Impl.";
     }
-    /*
-    value(1; oData)
+
+    value(1; OData)
     {
-        Caption = 'oData';
+        Caption = 'OData';
+        Implementation = "MDS IData Provider" = "MDS OData Impl.";
     }
+    
+    /* TODO:
     value(2; SOAP)
     {
         Caption = 'SOAP';
