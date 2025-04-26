@@ -97,10 +97,17 @@ page 50106 "MDS Data Request Config Card"
         }
         area(Navigation)
         {
-            action("Open Links")
+            action("Request Links")
             {
+                Caption = 'Request Links';
                 RunObject = Page "MDS Data Request Link List";
                 RunPageLink = "Config No." = field("No.");
+            }
+            action("Request Attributes")
+            {
+                Caption = 'Request Attributes';
+                RunObject = Page "MDS Data Request Attr. List";
+                RunPageLink = "Request Config No" = field("No.");
             }
         }
     }

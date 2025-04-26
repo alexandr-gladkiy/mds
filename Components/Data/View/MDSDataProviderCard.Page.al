@@ -41,6 +41,10 @@ page 50107 "MDS Data Provider Card"
                     {
                         ToolTip = 'Specifies the value of the Status field.', Comment = '%';
                     }
+                    field("Attribute Count"; Rec."Attribute Count")
+                    {
+                        ToolTip = 'Specifies the value of the Attribute Count field.', Comment = '%';
+                    }
                 }
 
             }

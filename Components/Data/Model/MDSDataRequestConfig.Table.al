@@ -76,6 +76,13 @@ table 50103 "MDS Data Request Config"
             FieldClass = FlowField;
             CalcFormula = lookup("MDS Data Provider".Type where("No." = field("Data Provider No.")));
         }
+        field(104; "Attribute Count"; Integer)
+        {
+            Caption = 'Attribute Rules';
+            Editable = false;
+            FieldClass = FlowField;
+            CalcFormula = count("MDS Data Parse Rule" where("Data Provider No." = field("No."), "Request Config No." = field("No.")));
+        }
     }
     keys
     {

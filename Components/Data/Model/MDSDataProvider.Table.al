@@ -49,6 +49,13 @@ table 50102 "MDS Data Provider"
         {
             Caption = 'Password';
         }
+        field(100; "Attribute Count"; Integer)
+        {
+            Caption = 'Attribute Rules';
+            Editable = false;
+            FieldClass = FlowField;
+            CalcFormula = count("MDS Data Request Attribute" where("Data Provider No." = field("No."), "Request Config No" = const('')));
+        }
     }
     keys
     {

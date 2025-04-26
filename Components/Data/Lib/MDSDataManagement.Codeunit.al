@@ -201,4 +201,43 @@ codeunit 50103 "MDS Data Management"
         RecordId := this.DataRequestLink.RecordId;
     end;
 
+    procedure "DataRequestAttribute.OnInsert"(var DataRequestAttribute: Record "MDS Data Request Attribute")
+    begin
+
+    end;
+
+    procedure "DataRequestAttribute.OnModify"(var DataRequestAttribute: Record "MDS Data Request Attribute"; xDataRequestAttribute: Record "MDS Data Request Attribute")
+    begin
+
+    end;
+
+    procedure "DataRequestAttribute.OnDelete"(var DataRequestAttribute: Record "MDS Data Request Attribute")
+    begin
+
+    end;
+
+    procedure "DataRequestAttribute.OnRename"(var DataRequestAttribute: Record "MDS Data Request Attribute"; xDataRequestAttribute: Record "MDS Data Request Attribute")
+    begin
+
+    end;
+
+    procedure "DataParseRule.OnInsert"(var DataParseRule: Record "MDS Data Parse Rule")
+    begin
+
+    end;
+
+    procedure "DataParseRule.OnModify"(var DataParseRule: Record "MDS Data Parse Rule"; xDataParseRule: Record "MDS Data Parse Rule")
+    begin
+
+    end;
+
+    procedure "DataParseRule.OnDelete"(var DataParseRule: Record "MDS Data Parse Rule")
+    begin
+
+    end;
+
+    procedure "DataParseRule.OnRename"(var DataParseRule: Record "MDS Data Parse Rule"; xDataParseRule: Record "MDS Data Parse Rule")
+    begin
+
+    end;
 }
