@@ -1,3 +1,8 @@
+namespace mds.mds;
+using System.RestClient;
+using System.IO;
+using System.Utilities;
+
 table 50103 "MDS Data Request Config"
 {
     Caption = 'Source';
@@ -26,13 +31,29 @@ table 50103 "MDS Data Request Config"
         {
             Caption = 'Status';
         }
-        field(10; "Query String"; Text[250])
+        field(5; "Http Method"; Enum "Http Method")
+        {
+            Caption = 'Http Method';
+        }
+        field(10; URI; Text[100])
+        {
+            Caption = 'URI';
+        }
+        field(11; "Query String"; Text[250])
         {
             Caption = 'Query String';
         }
-        field(11; "Regex Filter URL"; Text[250])
+        field(12; "Regex Filter URL"; Text[250])
         {
             Caption = 'Regex Filter URL';
+        }
+        field(13; "Request Content"; Text[1024])
+        {
+            Caption = 'Request Content';
+        }
+        field(14; "Pattern For Item Link"; Text[1024])
+        {
+            Caption = 'Patten for item link';
         }
         field(100; "Data Provider Name"; Text[50])
         {
@@ -46,7 +67,7 @@ table 50103 "MDS Data Request Config"
             Caption = 'Data Provider Base Url';
             Editable = false;
             FieldClass = FlowField;
-            CalcFormula = lookup("MDS Data Provider"."Web Base URL" where("No." = field("Data Provider No.")));
+            CalcFormula = lookup("MDS Data Provider"."Base URL" where("No." = field("Data Provider No.")));
         }
         field(102; "Data Provider Type"; Enum "MDS Data Provider Type")
         {

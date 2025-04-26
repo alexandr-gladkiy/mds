@@ -60,8 +60,8 @@ codeunit 50104 "MDS Data Provider Service"
     begin
         TestSetup();
         if DoTestField then
-            GlobalDataProvider.TestField("Web Base URL");
-        exit(GlobalDataProvider."Web Base URL");
+            GlobalDataProvider.TestField("Base URL");
+        exit(GlobalDataProvider."Base URL");
     end;
 
     procedure "Get.WebSitemapURL"(DoTestField: Boolean): Text[250]

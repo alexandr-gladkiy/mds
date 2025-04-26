@@ -1,0 +1,313 @@
+@authLogin = abs
+@authPassword = EO2BnriTzd+AaVCZGlLtk10HfmDY+qWRDUCksqurIPA=
+@domain = bcdev.justjewelrysoftware.com:15068
+@instance = bc210
+@companyId = f1fe1b57-a792-ed11-8d92-000d3a7b1072
+
+
+# Tivol Api Key
+@apiKey = kvCx9caM9AAgTedZBacXJVwXQpGEqXevE7ymIgaRY
+
+### Get Sources list from aje21
+GET https://ajeservices21.justjewelrysoftware.com:17758/bc210app/api/aje/masterdata/v1.0/companies(f1fe1b57-a792-ed11-8d92-000d3a7b1072)/sources?tenant=default&$expand=sourceAttributes
+Authorization: Basic {{authLogin}}:{{authPassword}}
+content-type: application/json
+
+### Get Companies list
+GET https://{{domain}}/{{instance}}/api/v2.0/companies
+Authorization: Basic {{authLogin}}:{{authPassword}}
+content-type: application/json
+
+### Get Attributes List
+GET https://{{domain}}/{{instance}}/api/aje/masterdata/v1.0/companies({{companyId}})/attributes?$filter=apiKey eq '{{apiKey}}'&tenant=default&$expand=attributeValues
+Authorization: Basic {{authLogin}}:{{authPassword}}
+content-type: application/json
+
+### Get Product List
+GET https://{{domain}}/{{instance}}/api/aje/masterdata/v1.0/companies({{companyId}})/products?$filter=apiKey eq '{{apiKey}}'&tenant=default
+Authorization: Basic {{authLogin}}:{{authPassword}}
+content-type: application/json
+
+### Get Invoice List
+GET https://{{domain}}/{{instance}}/api/aje/masterdata/v1.0/companies({{companyId}})/invoices?$filter=apiKey eq '{{apiKey}}' and invoiceNumber eq '49661077'&$expand=invoiceAttributeValues&tenant=default
+Authorization: Basic {{authLogin}}:{{authPassword}}
+content-type: application/json
+
+### Get Sources List
+GET https://{{domain}}/{{instance}}/api/aje/masterdata/v1.0/companies({{companyId}})/sources?$filter=apiKey eq '{{apiKey}}'&tenant=default&$expand=sourceAttributes
+Authorization: Basic {{authLogin}}:{{authPassword}}
+content-type: application/json
+
+
+### Get Mapping Config
+GET https://{{domain}}/{{instance}}/api/aje/masterdata/v1.0/companies({{companyId}})/mappingConfigs?$filter=apiKey eq '{{apiKey}}'&tenant=default&$expand=mappingConfigLines
+Authorization: Basic {{authLogin}}:{{authPassword}}
+content-type: application/json
+
+### Create Request v1.0
+POST https://{{domain}}/{{instance}}/api/aje/masterdata/v1.0/companies({{companyId}})/requests?tenant=default
+Authorization: Basic {{authLogin}}:{{authPassword}}
+content-type: application/json
+
+{
+    "sourceNo": "SRC0001",
+    "externalReferenceGuid": "393f21bf-3d7b-4df8-b4b7-e65ec510b797",
+    "subscriberApiKey": "{{apiKey}}",
+    "sourceReferenceNo": "M124200-0002",
+    "sourceReferenceUrl":"" 
+}
+
+### Create Request v1.1 - Product
+POST https://{{domain}}/{{instance}}/api/aje/mds/v1.1/companies({{companyId}})/requests?tenant=default
+Authorization: Basic {{authLogin}}:{{authPassword}}
+content-type: application/json
+
+{
+    "requestGuid":"{393f21bf-3d7b-4df8-b4b7-e65ec510b797}",
+    "messageBody":"{\"requestType\":\"Product\",\"subscriberApiKey\":\"kvCx9caM9AAgTedZBacXJVwXQpGEqXevE7ymIgaRY\",\"requestBody\":{\"sourceReferenceNo\":\"49788351\",\"sourceReferenceUrl\":\"\",\"sourceNo\":\"SRC0100\"},\"authenticationCustom\":{\"authLogin\":\"DFJ_Bangor\",\"authPassword\":\"Bangor1!\",\"authApiKey\":\"\",\"authNtlmDomain\":\"\"}}"
+}
+
+
+### Create Request v1.1 - Purchase Invoice
+@stullerAuthLogin = tivolplaza
+@stullerAuthPassword = T!v0lplaza
+POST https://{{domain}}/{{instance}}/api/aje/mds/v1.1/companies({{companyId}})/requests?tenant=default
+Authorization: Basic {{authLogin}}:{{authPassword}}
+content-type: application/json
+
+{
+    "requestGuid":"{ded83809-bc0d-4814-af82-07b2d5ba43b7}",
+    "messageBody":"{\"requestType\":\"Purchase Invoice\",\"subscriberApiKey\":\"kvCx9caM9AAgTedZBacXJVwXQpGEqXevE7ymIgaRY\",\"requestBody\":{\"sourceReferenceNo\":\"2097219\",\"sourceReferenceUrl\":\"\",\"sourceNo\":\"SRC0400\"},\"authenticationCustom\":{\"authLogin\":\"\",\"authPassword\":\"\",\"authApiKey\":\"\",\"authNtlmDomain\":\"\"}}"
+}
+###     
+### "messageBody":"{\"requestType\":\"Purchase Invoice\",\"subscriberApiKey\":\"kvCx9caM9AAgTedZBacXJVwXQpGEqXevE7ymIgaRY\",\"requestBody\":{\"sourceReferenceNo\":\"49869602\",\"sourceReferenceUrl\":\"\",\"sourceNo\":\"SRC0100\"},\"authenticationCustom\":{\"authLogin\":\"{{stullerAuthLogin}}\",\"authPassword\":\"{{stullerAuthPassword}}\",\"authApiKey\":\"\",\"authNtlmDomain\":\"\"}}"    
+
+### Get Target Document - Purchase Invoice
+###
+GET https://{{domain}}/{{instance}}/api/aje/masterdata/v1.0/companies({{companyId}})/invoices?tenant=default&$expand=invoiceAttributeValues&$filter=(no eq 'PI000052') and (apiKey eq '{{apiKey}}')
+Authorization: Basic {{authLogin}}:{{authPassword}}
+content-type: application/json
+
+### Get Purchase Invoices v1.0 By Subscriber and DateRange
+GET https://{{domain}}/{{instance}}/api/aje/masterdata/v1.0/companies({{companyId}})/invoices?$filter=apiKey eq '{{apiKey}}' and invoiceDate ge 2024-6-9 and invoiceDate le 2024-6-23
+Authorization: Basic {{authLogin}}:{{authPassword}}
+Content-Type: application/json
+
+
+
+### Message Body Template ^^^
+### Message Body must be encoded
+### Create Request v1.1 Product
+POST https://{{domain}}/{{instance}}/api/aje/mds/v1.1/companies({{companyId}})/requests?tenant=default
+Authorization: Basic {{authLogin}}:{{authPassword}}
+content-type: application/json
+
+{
+    "requestGuid":"{aac18c18-9b56-47cf-ad32-32cab8e544de}",
+    "messageBody":"{\"requestType\":\"Product\",\"subscriberApiKey\":\"kvCx9caM9AAgTedZBacXJVwXQpGEqXevE7ymIgaRY\",\"requestBody\":{\"sourceReferenceNo\":\"\",\"sourceReferenceUrl\":\"https://www.rolex.com/en-us/watches/1908/m52509-0006\",\"sourceNo\":\"SRC0001\"}}"
+}
+
+### "messageBody":"{\"requestType\":\"Product\",\"subscriberApiKey\":\"kvCx9caM9AAgTedZBacXJVwXQpGEqXevE7ymIgaRY\",\"requestBody\":{\"sourceReferenceNo\":\"m124200-0002\",\"sourceReferenceUrl\":\"https://www.rolex.com/watches/oyster-perpetual/m124200-0002\",\"sourceNo\":\"SRC0001\"},\"authenticationCustom\":{\"authLogin\":\"\",\"authPassword\":\"\",\"authApiKey\":\"\",\"authNtlmDomain\":\"\"}}"
+### Message Body Template ^^^ 
+### Message Body must be encoded
+{
+  "requestGuid": "393f21bf-3d7b-4df8-b4b7-e65ec510b797",
+  "requestType": "Product",
+  "subscriberApiKey": "YRsUwf9zK19aTvVvftYfVJkTUBLdUXmtDsI6cLXakCo",
+  "requestBody": {
+    "sourceReferenceNo": "M116680-0002",
+    "sourceReferencePath": "",
+    "sourceNo": "",
+    "externalReferenceGuid": "db6c0aa4-3f8a-48ca-8e98-b85710855335"
+  },
+  "authenticationCustom": {
+    "authLogin": "",
+    "authPassword": "",
+    "authApiKey": "",
+    "authNtlmDomain": ""
+  }
+}
+
+### Create Value Cange Log
+POST https://{{domain}}/{{instance}}/api/aje/masterdata/v1.0/companies({{companyId}})/changelogs?tenant=default
+Authorization: Basic {{authLogin}}:{{authPassword}}
+content-type: application/json
+
+{
+    "sourceReferenceNo": "D25353MSSABD",
+    "attributeCode": "WTC-0220",
+    "attributeValueCode": "",
+    "subscriberMdsValue": "Center Hour",
+    "subscriberNewValue": "Center Hour 5",
+    "subscriberApiKey": "{{apiKey}}"
+}
+
+
+
+### Site Map Data Providers
+# Stuller
+#@stullerLogin = DFJ_Bangor
+#@stullerPassword = Bangor1!
+
+@stullerLogin = tivolplaza
+@stullerPassword = T!v0lplaza
+
+###
+GET https://api.stuller.com/v2/products?SKU=10138:44061:P:10KR
+Authorization: Basic {{stullerLogin}}:{{stullerPassword}}
+
+### pagination by GET
+GET https://api.stuller.com/v2/gem/gemstones?NextPage=eyJTZXJpYWxOdW1iZXJzIjpudWxsLCJDb2xvcnMiOltdLCJTaGFwZXMiOltdLCJTdG9uZVR5cGVzIjpbXSwiTGVuZ3RoIjowLjAsIldpZHRoIjowLjAsIkZpbHRlcnMiOltdLCJOZXh0UGFnZSI6bnVsbCwiUGFnZSI6NiwiUGFnZVNpemUiOm51bGx9
+Authorization: Basic {{stullerLogin}}:{{stullerPassword}}
+
+###
+GET https://api.stuller.com/v2/products?MerchandisingCategory='Procurement And Material Ops'
+Authorization: Basic {{stullerLogin}}:{{stullerPassword}}
+
+###
+GET https://api.stuller.com/v2/products/stonefamilies
+content-type: application/json
+Authorization: Basic {{stullerLogin}}:{{stullerPassword}}
+
+### Stuller Invoices ###
+###
+GET https://api.stuller.com/v2/invoice?invoiceNumber=49810497
+Authorization: Basic {{stullerLogin}}:{{stullerPassword}}
+
+###
+GET https://api.stuller.com/v2/products/advancedproductfilters
+Content-Type: application/json
+Authorization: Basic {{stullerLogin}}:{{stullerPassword}}
+
+###
+POST https://api.stuller.com/v2/products
+Content-Type: application/json
+Authorization: Basic {{stullerLogin}}:{{stullerPassword}}
+
+{
+    "Filter": [2],
+    "AdvancedProductFilters": [
+        {
+            "Type": "ProductType",
+            "Values": [
+                {
+                    "DisplayValue": "Rosaries",
+                    "Value": "Rosaries"
+                }
+            ]
+        }
+    ]
+}
+
+
+### Stuller Invoice
+GET https://api.stuller.com/v2/products?ProductId=1000026497
+Authorization: Basic {{stullerLogin}}:{{stullerPassword}}
+
+
+###
+GET https://api.stuller.com/v2/products
+Authorization: Basic {{stullerLogin}}:{{stullerPassword}}
+
+
+### Get jkfindings
+@jkAuthLogin = k-ecom
+@jkAuthPassword = s4jqWB+tokHnOF3It1mYkwRpHpjXPaFUWqsRTwznmNc=
+
+###
+GET https://bc.jkfindings.com:7058/AJLiveJewelryMfg/ODataV4/Company('JK%20Acquisition%20LLC')/AJEJewelryAPI?$filter=%20ItemNo%20eq%20%27TEST001%27
+Authorization: Basic {{jkAuthLogin}}:{{jkAuthPassword}}
+content-type: application/json
+
+### Item Status Code = Active
+GET https://bc.jkfindings.com:7058/AJLiveJewelryMfg/ODataV4/Company('JK%20Acquisition%20LLC')/AJEJewelryAPI?$filter=ItemStatusCode%20eq%20%27DC%27%20or%20ItemStatusCode%20eq%20%27ACTIVE%27&$skiptoken='C00184765'
+Authorization: Basic {{jkAuthLogin}}:{{jkAuthPassword}}
+content-type: application/json
+Prefer: odata.maxpagesize=10
+
+
+### Boss Logics
+@BosslogisticApiKey = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2siOiJlZjg4NjdkZGQ1NjhhYzhkOGEwNmVkIiwicHciOiI0ODI0ODBhZDYxNDBkNGQ0OWE3ZGNhYmM3NjQxOGY0NyIsImlhIjoxNjkyOTczMjQ5LCJpc3N1ZXIiOiJib3NzLWxvZ2ljcyIsInVzZXJfaWQiOjEzNDUsImVtYWlsIjoiIiwidXNlcl90b2tlbiI6MX0.PtLPgrBaQul1K1pL6G4mDgWFxZbrQpOUSlVP6BIl4II
+###
+GET https://bosslogics.live/api/Item?filters=[{"property":"active","comparison":"=","value":true},{"property":"category.code","comparison":"<>","value":"Timepieces"}]&limit=10
+X-API-Key: {{BosslogisticApiKey}}
+
+###
+GET https://bosslogics.live/api/Item?filters=[{"property":"common_sku","comparison":"=","value":"R25667M88BFG13"}]
+X-API-Key: {{BosslogisticApiKey}}
+
+
+### F-Goldman
+@FgmLogin = SANALIVE
+@FgmPassword = SQS5ROo00dJhIqNyD4fj
+
+#Authorization: NTLM TlRMTVNTUAADAAAAGAAYAEgAAADKAMoAYAAAAAAAAAAqAQAAEAAQACoBAAAYABgAOgEAAAAAAABSAQAABYKJogUBKAoAAAAPxVn7sL3syuQnfJpjr9nhFqYUEo/ckLPybYuMrPt9suEuW0c9CSSTAQEBAAAAAAAAwOY0DtLq2QFegaWU4uW33AAAAAACABAARgBHAE8ATABEAE0AQQBOAAEADgBTAEEATgBBAEIAMgBCAAQAGABmAGcAbwBsAGQAbQBhAG4ALgBjAG8AbQADACgAUwBBAE4AQQBCADIAQgAuAGYAZwBvAGwAZABtAGEAbgAuAGMAbwBtAAUAGABmAGcAbwBsAGQAbQBhAG4ALgBjAG8AbQAHAAgAX3+GDtLq2QEAAAAAAAAAAFMAQQBOAEEATABJAFYARQBQAFIATwBfAEYATwBSAFQASQBTAF8ATQA=
+POST https://sanab2b.fgoldman.com:8047/DynamicsNAV/WS/FGI/Codeunit/SC_NAV2009_WebService/ HTTP/1.1
+Authorization: NTLM {{FgmLogin}}:{{FgmPassword}}
+Content-Type: application/xml
+Accept-Encoding: gzip, deflate
+Content-Length: 900
+Host: sanab2b.fgoldman.com:8047
+User-Agent: Apache-HttpClient/4.5.5 (Java/16.0.1)
+Connection: keep-alive
+
+<?xml version="1.0"?>
+<Request>
+    <Operation>GetProducts</Operation>
+    <Params>
+        <VisibleOnly>0</VisibleOnly>
+        <LoadRelatedSkus>1</LoadRelatedSkus>
+        <LoadVisibilityRules>1</LoadVisibilityRules>
+        <CalculatePrices>0</CalculatePrices>
+        <CalculateInventory>0</CalculateInventory>
+        <CalculateSkuPrices>0</CalculateSkuPrices>
+        <CalculateSkuInventory>0</CalculateSkuInventory>
+        <CheckStock>0</CheckStock>
+        <AccountId>5088</AccountId>
+        <AccountType>Customer</AccountType>
+        <MultiCurrency>1</MultiCurrency>
+        <PageIndex>0</PageIndex>
+        <PageSize>5</PageSize>
+        <SortField>Id</SortField>
+        <SortAscending>1</SortAscending>
+        <Filter>
+        <for field="Id">
+            <Equal>11-5573C7-G.00</Equal>
+        </for>
+        </Filter>
+        <WebsiteId>SanaStore</WebsiteId>
+    </Params>
+</Request>
+
+
+### OSTBYE
+
+@OSTBYE_Login = OSTBYE_SOAP
+@OSTBYE_Password = YNsvCpF+8bg62XbvRCw0mITcWg4YOg//v+HUipwC91s=
+
+###
+POST https://ostbye.justjewelrysoftware.com:9348/ostbyews/ODataV4/Company('Ostbye')/AJEDataRequest?tenant=ostbye
+Authorization: Basic {{OSTBYE_Login}}:{{OSTBYE_Password}}
+content-type: application/json
+
+{
+    "Primary_Key": "1",
+    "lastItemNo": "C00000163",
+    "pagination": 50,
+    "lastModifiedDate": "2023-11-19"
+}
+
+@Christopher_Login = API_DATA
+@Christopher_Password = eczOJDZosjEyF/ujBiN4PJvlzegbmf0KufPOY7/Nu+Y=
+
+###
+POST https://bc.justjewelrysoftware.com:9248/AJLiveJewelryMfg/ODataV4/Company('Christopher%20Designs')/AJEDataRequest?tenant=christopherdesigns
+Authorization: Basic {{Christopher_Login}}:{{Christopher_Password}}
+content-type: application/json
+
+{
+    "Primary_Key": "1",
+    "lastItemNo": "",
+    "pagination": 2,
+    "lastModifiedDate": ""
+}

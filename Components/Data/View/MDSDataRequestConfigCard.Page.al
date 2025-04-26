@@ -36,13 +36,21 @@ page 50106 "MDS Data Request Config Card"
                 {
                     ToolTip = 'Specifies the value of the Data Provider Type field.', Comment = '%';
                 }
+                field("Data Provider Base Url"; Rec."Data Provider Base Url")
+                {
+                    ToolTip = 'Specifies the value of the Data Provider Base Url field.', Comment = '%';
+                }
                 field(Status; Rec.Status)
                 {
                     ToolTip = 'Specifies the value of the Status field.', Comment = '%';
                 }
-                field("Data Provider Base Url"; Rec."Data Provider Base Url")
+                field("Http Method"; Rec."Http Method")
                 {
-                    ToolTip = 'Specifies the value of the Data Provider Base Url field.', Comment = '%';
+                    ToolTip = 'Specifies the value of the Http Method field.', Comment = '%';
+                }
+                field(URI; Rec.URI)
+                {
+                    ToolTip = 'Specifies the value of the URI field.', Comment = '%';
                 }
                 field("Query String"; Rec."Query String")
                 {
@@ -52,6 +60,10 @@ page 50106 "MDS Data Request Config Card"
                 {
                     ToolTip = 'Specifies the value of the Regex Filter URL field.', Comment = '%';
                 }
+                field("Pattern For Item Link"; Rec."Pattern For Item Link")
+                {
+                    ToolTip = 'Specifies the value of the Pattern For Item Link field.', Comment = '%';
+                }
             }
         }
     }
@@ -59,7 +71,7 @@ page 50106 "MDS Data Request Config Card"
     {
         area(Processing)
         {
-            action("Call")
+            action(Call)
             {
                 trigger OnAction()
                 begin
@@ -95,4 +107,12 @@ page 50106 "MDS Data Request Config Card"
 
     var
         sRequestConfig: Codeunit "MDS Data Request Conf. Service";
+        sDataProvider: Codeunit "MDS Data Provider Service";
+        IsWebSiteFieldsVisible: Boolean;
+
+    trigger OnAfterGetRecord()
+    begin
+        sDataProvider."Set.ByPK"(Rec."Data Provider No.");
+        IsWebSiteFieldsVisible := sDataProvider."Get.Type"() = Rec."Data Provider Type"::OData;
+    end;
 }

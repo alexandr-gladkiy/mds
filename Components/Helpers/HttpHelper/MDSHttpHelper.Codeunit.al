@@ -12,6 +12,7 @@ codeunit 50109 "MDS Http Helper"
         Request: HttpRequestMessage;
         Response: HttpResponseMessage;
         Url: Text;
+        RequestContent: Text;
         Method: Enum "Http Method";
 
     procedure Call(): Boolean
@@ -31,6 +32,11 @@ codeunit 50109 "MDS Http Helper"
     procedure "Set.Url"(Url: Text)
     begin
         this.Url := Url;
+    end;
+
+    procedure "Set.RequestContent"(RequestContent: Text)
+    begin
+        this.RequestContent := RequestContent;
     end;
 
     procedure "Get.Response.StatusCode"(): Integer

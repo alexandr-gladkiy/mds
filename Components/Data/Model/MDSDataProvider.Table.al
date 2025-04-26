@@ -29,13 +29,25 @@ table 50102 "MDS Data Provider"
             Caption = 'Status';
         }
 
-        field(10; "Web Base URL"; Text[250])
+        field(10; "Base URL"; Text[250])
         {
-            Caption = 'Web Base URL';
+            Caption = 'Base URL';
         }
         field(11; "Web Sitemap Url"; Text[250])
         {
             Caption = 'Web Sitemap Url';
+        }
+        field(20; "Authorization Type"; Enum "MDS Authorization Type")
+        {
+            Caption = 'Authorization Type';
+        }
+        field(21; Login; Text[100])
+        {
+            Caption = 'Login';
+        }
+        field(22; Password; Text[100])
+        {
+            Caption = 'Password';
         }
     }
     keys
