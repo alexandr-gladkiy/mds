@@ -7,8 +7,8 @@ codeunit 50103 "MDS Data Management"
 
     var
         GlobalDataProvider: Record "MDS Data Provider";
-        GlobalDataRequestConfig: Record "MDS Data Request Config";
-        DataRequestLink: Record "MDS Data Request Link";
+        GlobalDataRequestConfig: Record "MDS Data Source";
+        DataRequestLink: Record "MDS Data Source Link";
         sSetup: Codeunit "MDS Setup Service";
 
 
@@ -71,32 +71,32 @@ codeunit 50103 "MDS Data Management"
     end;
 
 
-    procedure "DataRequestConfig.OnInsert"(var DataRequestConfig: Record "MDS Data Request Config")
+    procedure "DataRequestConfig.OnInsert"(var DataRequestConfig: Record "MDS Data Source")
     begin
         DataRequestConfig.TestField("No.");
     end;
 
-    procedure "DataRequestConfig.OnModify"(var DataRequestConfig: Record "MDS Data Request Config"; xDataRequestConfig: Record "MDS Data Request Config")
+    procedure "DataRequestConfig.OnModify"(var DataRequestConfig: Record "MDS Data Source"; xDataRequestConfig: Record "MDS Data Source")
     begin
 
     end;
 
-    procedure "DataRequestConfig.OnDelete"(var DataRequestConfig: Record "MDS Data Request Config")
+    procedure "DataRequestConfig.OnDelete"(var DataRequestConfig: Record "MDS Data Source")
     begin
 
     end;
 
-    procedure "DataRequestConfig.OnRename"(var DataRequestConfig: Record "MDS Data Request Config"; xDataRequestConfig: Record "MDS Data Request Config")
+    procedure "DataRequestConfig.OnRename"(var DataRequestConfig: Record "MDS Data Source"; xDataRequestConfig: Record "MDS Data Source")
     begin
 
     end;
 
-    procedure "DataRequestConfig.OnValidate.No"(var DataRequestConfig: Record "MDS Data Request Config"; xDataRequestConfig: Record "MDS Data Request Config")
+    procedure "DataRequestConfig.OnValidate.No"(var DataRequestConfig: Record "MDS Data Source"; xDataRequestConfig: Record "MDS Data Source")
     begin
         this."Set.DataRequestConfig.No"(DataRequestConfig);
     end;
 
-    local procedure "Set.DataRequestConfig.No"(var DataRequestConfig: Record "MDS Data Request Config")
+    local procedure "Set.DataRequestConfig.No"(var DataRequestConfig: Record "MDS Data Source")
     var
         NoSeries: Codeunit "No. Series";
     begin
@@ -104,7 +104,7 @@ codeunit 50103 "MDS Data Management"
             DataRequestConfig."No." := NoSeries.GetNextNo(this.sSetup."Get.SerialNo.DataRequestConfig"());
     end;
 
-    procedure "DataRequestConfig.CreateOrModify.Single"(DataRequestConfig: Record "MDS Data Request Config"; RunTrigger: Boolean) RecordId: RecordId
+    procedure "DataRequestConfig.CreateOrModify.Single"(DataRequestConfig: Record "MDS Data Source"; RunTrigger: Boolean) RecordId: RecordId
     begin
         if GlobalDataRequestConfig.Get(DataRequestConfig."No.") then begin
             GlobalDataRequestConfig.TransferFields(DataRequestConfig, false);
@@ -118,7 +118,7 @@ codeunit 50103 "MDS Data Management"
         RecordId := GlobalDataRequestConfig.RecordId;
     end;
 
-    procedure "Source.CreateOrModify.List"(var DataRequestConfigBuffer: Record "MDS Data Request Config"; RunTrigger: Boolean) RecordIdList: List of [RecordId]
+    procedure "Source.CreateOrModify.List"(var DataRequestConfigBuffer: Record "MDS Data Source"; RunTrigger: Boolean) RecordIdList: List of [RecordId]
     var
         RecordId: RecordId;
     begin
@@ -152,27 +152,27 @@ codeunit 50103 "MDS Data Management"
 
 
 
-    procedure "DataRequestLink.OnInsert"(var DataRequestLink: Record "MDS Data Request Link")
+    procedure "DataRequestLink.OnInsert"(var DataRequestLink: Record "MDS Data Source Link")
     begin
 
     end;
 
-    procedure "DataRequestLink.OnModify"(var DataRequestLink: Record "MDS Data Request Link"; xDataRequestLink: Record "MDS Data Request Link")
+    procedure "DataRequestLink.OnModify"(var DataRequestLink: Record "MDS Data Source Link"; xDataRequestLink: Record "MDS Data Source Link")
     begin
 
     end;
 
-    procedure "DataRequestLink.OnDelete"(var DataRequestLink: Record "MDS Data Request Link")
+    procedure "DataRequestLink.OnDelete"(var DataRequestLink: Record "MDS Data Source Link")
     begin
 
     end;
 
-    procedure "DataRequestLink.OnRename"(var DataRequestLink: Record "MDS Data Request Link"; xDataRequestLink: Record "MDS Data Request Link")
+    procedure "DataRequestLink.OnRename"(var DataRequestLink: Record "MDS Data Source Link"; xDataRequestLink: Record "MDS Data Source Link")
     begin
 
     end;
 
-    procedure "DataRequestLink.CreateOrModify.List"(var DataRequestLinkBuffer: Record "MDS Data Request Link"; RunTrigger: Boolean) RecordIdList: List of [RecordId]
+    procedure "DataRequestLink.CreateOrModify.List"(var DataRequestLinkBuffer: Record "MDS Data Source Link"; RunTrigger: Boolean) RecordIdList: List of [RecordId]
     var
         RecordId: RecordId;
     begin
@@ -187,7 +187,7 @@ codeunit 50103 "MDS Data Management"
         until DataRequestLinkBuffer.Next() = 0;
     end;
 
-    procedure "DataRequestLink.CreateOrModify.Single"(DataRequestLink: Record "MDS Data Request Link"; RunTrigger: Boolean) RecordId: RecordId
+    procedure "DataRequestLink.CreateOrModify.Single"(DataRequestLink: Record "MDS Data Source Link"; RunTrigger: Boolean) RecordId: RecordId
     begin
         if this.DataRequestLink.Get(DataRequestLink."Config No.", DataRequestLink."Link ID") then begin
             this.DataRequestLink.TransferFields(DataRequestLink, false);
@@ -201,22 +201,22 @@ codeunit 50103 "MDS Data Management"
         RecordId := this.DataRequestLink.RecordId;
     end;
 
-    procedure "DataRequestAttribute.OnInsert"(var DataRequestAttribute: Record "MDS Data Request Attribute")
+    procedure "DataRequestAttribute.OnInsert"(var DataRequestAttribute: Record "MDS Data Source Attribute")
     begin
 
     end;
 
-    procedure "DataRequestAttribute.OnModify"(var DataRequestAttribute: Record "MDS Data Request Attribute"; xDataRequestAttribute: Record "MDS Data Request Attribute")
+    procedure "DataRequestAttribute.OnModify"(var DataRequestAttribute: Record "MDS Data Source Attribute"; xDataRequestAttribute: Record "MDS Data Source Attribute")
     begin
 
     end;
 
-    procedure "DataRequestAttribute.OnDelete"(var DataRequestAttribute: Record "MDS Data Request Attribute")
+    procedure "DataRequestAttribute.OnDelete"(var DataRequestAttribute: Record "MDS Data Source Attribute")
     begin
 
     end;
 
-    procedure "DataRequestAttribute.OnRename"(var DataRequestAttribute: Record "MDS Data Request Attribute"; xDataRequestAttribute: Record "MDS Data Request Attribute")
+    procedure "DataRequestAttribute.OnRename"(var DataRequestAttribute: Record "MDS Data Source Attribute"; xDataRequestAttribute: Record "MDS Data Source Attribute")
     begin
 
     end;

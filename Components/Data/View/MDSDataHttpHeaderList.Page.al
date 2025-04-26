@@ -14,7 +14,7 @@ page 50109 "MDS Data Http Header List"
         {
             repeater(General)
             {
-                field("Data Povider No."; Rec."Data Povider No.")
+                field("Data Povider No."; Rec."Data Provider No.")
                 {
                     ToolTip = 'Specifies the value of the Data Povider No. field.', Comment = '%';
                 }

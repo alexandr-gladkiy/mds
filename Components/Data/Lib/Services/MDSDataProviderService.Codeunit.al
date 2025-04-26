@@ -6,7 +6,7 @@ codeunit 50104 "MDS Data Provider Service"
 
     var
         GlobalDataProvider: Record "MDS Data Provider"; //TODO: переделать на DataProvider, обращения переписать через this.
-        sDataRequestConfig: Codeunit "MDS Data Request Conf. Service";
+        sDataRequestConfig: Codeunit "MDS Data Source Service";
         IDataProvider: Interface "MDS IData Provider";
         IDataProviderIsInit: Boolean;
         GlobalIsSetup: Boolean;
@@ -119,7 +119,7 @@ codeunit 50104 "MDS Data Provider Service"
         IsSet := IDataProvider.SetDataProvider("Get.No"(true));
     end;
 
-    procedure "Impl.Call"(var DataRequestConfig: Record "MDS Data Request Config"; var ContentStream: InStream) IsCalled: Boolean
+    procedure "Impl.Call"(var DataRequestConfig: Record "MDS Data Source"; var ContentStream: InStream) IsCalled: Boolean
     begin
         "Set.ByPK"(DataRequestConfig."Data Provider No.");
         InitInterface("Get.Type"());
@@ -127,7 +127,7 @@ codeunit 50104 "MDS Data Provider Service"
             IsCalled := IDataProvider.Call(DataRequestConfig, ContentStream);
     end;
 
-    procedure "Impl.CreateDataRequestLinks"(var DataRequestConfig: Record "MDS Data Request Config"; var ContentStream: InStream) IsCalled: Boolean
+    procedure "Impl.CreateDataRequestLinks"(var DataRequestConfig: Record "MDS Data Source"; var ContentStream: InStream) IsCalled: Boolean
     begin
         "Set.ByPK"(DataRequestConfig."Data Provider No.");
         InitInterface("Get.Type"());
@@ -138,7 +138,7 @@ codeunit 50104 "MDS Data Provider Service"
             IsCalled := IDataProvider.CreateRequestLinks(DataRequestConfig, ContentStream)
     end;
 
-    procedure "Impl.DownloadContentRequestLink"(var DataRequestLink: Record "MDS Data Request Link"): Boolean
+    procedure "Impl.DownloadContentRequestLink"(var DataRequestLink: Record "MDS Data Source Link"): Boolean
     begin
         sDataRequestConfig."Set.ByPK"(DataRequestLink."Config No.");
         "Set.ByPK"(sDataRequestConfig."Get.DataProviderNo"(true));

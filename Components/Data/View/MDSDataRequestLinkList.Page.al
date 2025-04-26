@@ -1,11 +1,11 @@
 namespace mds.mds;
 
-page 50113 "MDS Data Request Link List"
+page 50113 "MDS Data Source Link List"
 {
     ApplicationArea = All;
     Caption = 'Source Request Links';
     PageType = List;
-    SourceTable = "MDS Data Request Link";
+    SourceTable = "MDS Data Source Link";
     DelayedInsert = true;
 
     layout

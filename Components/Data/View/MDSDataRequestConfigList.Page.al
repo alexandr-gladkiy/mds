@@ -1,11 +1,11 @@
 namespace mds.mds;
 
-page 50105 "MDS Data Request Config List"
+page 50105 "MDS Data Source List"
 {
     ApplicationArea = All;
     Caption = 'Source List';
     PageType = List;
-    SourceTable = "MDS Data Request Config";
+    SourceTable = "MDS Data Source";
     UsageCategory = Lists;
     DelayedInsert = true;
     CardPageId = "MDS Data Request Config Card";

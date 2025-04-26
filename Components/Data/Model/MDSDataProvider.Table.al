@@ -54,7 +54,7 @@ table 50102 "MDS Data Provider"
             Caption = 'Attribute Rules';
             Editable = false;
             FieldClass = FlowField;
-            CalcFormula = count("MDS Data Request Attribute" where("Data Provider No." = field("No."), "Request Config No" = const('')));
+            CalcFormula = count("MDS Data Source Attribute" where("Data Provider No." = field("No."), "Request Config No" = const('')));
         }
     }
     keys

@@ -90,6 +90,14 @@ page 50107 "MDS Data Provider Card"
                 end;
             }
         }
+        area(Navigation)
+        {
+            action("Http Headers")
+            {
+                RunObject = Page "MDS Data Http Header List";
+                RunPageLink = "Data Provider No." = field("No.");
+            }
+        }
     }
 
     var

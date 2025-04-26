@@ -1,9 +1,9 @@
-table 50108 "MDS Data Request Link"
+table 50108 "MDS Data Source Link"
 {
-    Caption = 'Source Request Link';
+    Caption = 'Data Source Link';
     DataClassification = CustomerContent;
-    LookupPageId = "MDS Data Request Link List";
-    DrillDownPageId = "MDS Data Request Link List";
+    LookupPageId = "MDS Data Source Link List";
+    DrillDownPageId = "MDS Data Source Link List";
 
     fields
     {
@@ -69,7 +69,7 @@ table 50108 "MDS Data Request Link"
             Caption = 'Config Name';
             Editable = false;
             FieldClass = FlowField;
-            CalcFormula = lookup("MDS Data Request Config".Name where("No." = field("Config No.")));
+            CalcFormula = lookup("MDS Data Source".Name where("No." = field("Config No.")));
         }
     }
     keys
@@ -132,49 +132,49 @@ table 50108 "MDS Data Request Link"
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnBeforeOnInsert(var Rec: Record "MDS Data Request Link"; IsHandled: Boolean)
+    local procedure OnBeforeOnInsert(var Rec: Record "MDS Data Source Link"; IsHandled: Boolean)
     begin
 
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnAfterOnInsert(var Rec: Record "MDS Data Request Link"; IsHandled: Boolean)
+    local procedure OnAfterOnInsert(var Rec: Record "MDS Data Source Link"; IsHandled: Boolean)
     begin
 
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnBeforeOnModify(var Rec: Record "MDS Data Request Link"; xRec: Record "MDS Data Request Link"; IsHandled: Boolean)
+    local procedure OnBeforeOnModify(var Rec: Record "MDS Data Source Link"; xRec: Record "MDS Data Source Link"; IsHandled: Boolean)
     begin
 
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnAfterOnModify(var Rec: Record "MDS Data Request Link"; xRec: Record "MDS Data Request Link"; IsHandled: Boolean)
+    local procedure OnAfterOnModify(var Rec: Record "MDS Data Source Link"; xRec: Record "MDS Data Source Link"; IsHandled: Boolean)
     begin
 
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnBeforeOnDelete(var Rec: Record "MDS Data Request Link"; IsHandled: Boolean)
+    local procedure OnBeforeOnDelete(var Rec: Record "MDS Data Source Link"; IsHandled: Boolean)
     begin
 
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnAfterOnDelete(var Rec: Record "MDS Data Request Link"; IsHandled: Boolean)
+    local procedure OnAfterOnDelete(var Rec: Record "MDS Data Source Link"; IsHandled: Boolean)
     begin
 
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnBeforeOnRename(var Rec: Record "MDS Data Request Link"; xRec: Record "MDS Data Request Link"; IsHandled: Boolean)
+    local procedure OnBeforeOnRename(var Rec: Record "MDS Data Source Link"; xRec: Record "MDS Data Source Link"; IsHandled: Boolean)
     begin
 
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnAfterOnRename(var Rec: Record "MDS Data Request Link"; xRec: Record "MDS Data Request Link"; IsHandled: Boolean)
+    local procedure OnAfterOnRename(var Rec: Record "MDS Data Source Link"; xRec: Record "MDS Data Source Link"; IsHandled: Boolean)
     begin
 
     end;

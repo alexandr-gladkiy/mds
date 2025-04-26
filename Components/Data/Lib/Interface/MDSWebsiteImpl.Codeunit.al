@@ -10,8 +10,8 @@ codeunit 50108 "MDS Website Impl." implements "MDS IData Provider"
 
     var
         sDataProvider: Codeunit "MDS Data Provider Service";
-        sDataRequestConfig: Codeunit "MDS Data Request Conf. Service";
-        sDataRequestLink: Codeunit "MDS Data Request Link Service";
+        sDataRequestConfig: Codeunit "MDS Data Source Service";
+        sDataRequestLink: Codeunit "MDS Data Source Link Service";
         mData: Codeunit "MDS Data Management";
         hHttp: Codeunit "MDS Http Helper";
         hHtml: Codeunit "MDS Html Helper";
@@ -50,7 +50,7 @@ codeunit 50108 "MDS Website Impl." implements "MDS IData Provider"
         end;
     end;
 
-    procedure Call(var DataRequestConfig: Record "MDS Data Request Config"; var ContentStream: InStream) IsCalled: Boolean
+    procedure Call(var DataRequestConfig: Record "MDS Data Source"; var ContentStream: InStream) IsCalled: Boolean
     var
         IsHandled: Boolean;
     begin
@@ -60,7 +60,7 @@ codeunit 50108 "MDS Website Impl." implements "MDS IData Provider"
         OnAfterCall(DataRequestConfig, ContentStream, IsHandled, IsCalled);
     end;
 
-    local procedure CallDataRequestContent(var DataRequestConfig: Record "MDS Data Request Config"; var ContentStream: InStream) ExistContent: Boolean
+    local procedure CallDataRequestContent(var DataRequestConfig: Record "MDS Data Source"; var ContentStream: InStream) ExistContent: Boolean
     var
         URL: Text;
     begin
@@ -76,7 +76,7 @@ codeunit 50108 "MDS Website Impl." implements "MDS IData Provider"
             exit(hHttp."Get.Content.As.Stream"(ContentStream));
     end;
 
-    procedure CreateRequestLinks(var DataRequestConfig: Record "MDS Data Request Config"; var ContentStream: InStream) IsCreated: Boolean
+    procedure CreateRequestLinks(var DataRequestConfig: Record "MDS Data Source"; var ContentStream: InStream) IsCreated: Boolean
     var
         IsHandled: Boolean;
     begin
@@ -86,9 +86,9 @@ codeunit 50108 "MDS Website Impl." implements "MDS IData Provider"
         OnBeforeCreateDataRequestLinks(DataRequestConfig, ContentStream, IsHandled, IsCreated);
     end;
 
-    local procedure ParseDataRequestContent(var DataRequestConfig: Record "MDS Data Request Config"; var ContentStream: InStream): Boolean
+    local procedure ParseDataRequestContent(var DataRequestConfig: Record "MDS Data Source"; var ContentStream: InStream): Boolean
     var
-        DataRequestLinkBuffer: Record "MDS Data Request Link" temporary;
+        DataRequestLinkBuffer: Record "MDS Data Source Link" temporary;
         XmlStream: InStream;
         Document: XmlDocument;
         NodeList: XmlNodeList;
@@ -101,7 +101,7 @@ codeunit 50108 "MDS Website Impl." implements "MDS IData Provider"
     end;
 
 
-    procedure ProcessDataRequestContentXmlToBuffer(DataRequestConfig: Record "MDS Data Request Config"; Nodes: XmlNodeList; var DataRequestLinkBuffer: Record "MDS Data Request Link")
+    procedure ProcessDataRequestContentXmlToBuffer(DataRequestConfig: Record "MDS Data Source"; Nodes: XmlNodeList; var DataRequestLinkBuffer: Record "MDS Data Source Link")
     var
         SubNodes: XmlNodeList;
         Node: XmlNode;
@@ -124,7 +124,7 @@ codeunit 50108 "MDS Website Impl." implements "MDS IData Provider"
             end
     end;
 
-    local procedure CallSubSitemap(DataRequestConfig: Record "MDS Data Request Config"; UrlPath: Text; var DataRequestLinkBuffer: Record "MDS Data Request Link")
+    local procedure CallSubSitemap(DataRequestConfig: Record "MDS Data Source"; UrlPath: Text; var DataRequestLinkBuffer: Record "MDS Data Source Link")
     var
         Nodes: XmlNodeList;
         IStream: InStream;
@@ -142,7 +142,7 @@ codeunit 50108 "MDS Website Impl." implements "MDS IData Provider"
         ProcessDataRequestContentXmlToBuffer(DataRequestConfig, Nodes, DataRequestLinkBuffer);
     end;
 
-    local procedure AddToSiteMapBuffer(DataRequestConfig: Record "MDS Data Request Config"; Node: XmlNode; var DataRequestLinkBuffer: Record "MDS Data Request Link")
+    local procedure AddToSiteMapBuffer(DataRequestConfig: Record "MDS Data Source"; Node: XmlNode; var DataRequestLinkBuffer: Record "MDS Data Source Link")
     var
         Nodes: XmlNodeList;
         LinkPath: Text;
@@ -208,7 +208,7 @@ codeunit 50108 "MDS Website Impl." implements "MDS IData Provider"
             DataRequestLinkBuffer.Modify(false);
     end;
 
-    procedure IsDataRequestUri(DataRequestConfig: Record "MDS Data Request Config"; UrlPath: Text): Boolean
+    procedure IsDataRequestUri(DataRequestConfig: Record "MDS Data Source"; UrlPath: Text): Boolean
     var
         UriPath: Text;
     begin
@@ -220,7 +220,7 @@ codeunit 50108 "MDS Website Impl." implements "MDS IData Provider"
             exit(true);
     end;
 
-    local procedure GetRequestLinkBufferLastLinkId(RequestConfigNo: Code[20]; var DataRequestLinkBuffer: Record "MDS Data Request Link"): Integer
+    local procedure GetRequestLinkBufferLastLinkId(RequestConfigNo: Code[20]; var DataRequestLinkBuffer: Record "MDS Data Source Link"): Integer
     begin
         DataRequestLinkBuffer.Reset();
         DataRequestLinkBuffer.SetRange("Config No.", RequestConfigNo);
@@ -228,7 +228,7 @@ codeunit 50108 "MDS Website Impl." implements "MDS IData Provider"
             exit(DataRequestLinkBuffer."Link ID")
     end;
 
-    procedure DownloadContentRequestLink(var DataRequestLink: Record "MDS Data Request Link") IsDownloaded: Boolean
+    procedure DownloadContentRequestLink(var DataRequestLink: Record "MDS Data Source Link") IsDownloaded: Boolean
     var
         IsHandled: Boolean;
     begin
@@ -238,7 +238,7 @@ codeunit 50108 "MDS Website Impl." implements "MDS IData Provider"
         OnAfterDownloadContentRequestLink(DataRequestLink, IsHandled, IsDownloaded);
     end;
 
-    local procedure DownloadContent(var DataRequestLink: Record "MDS Data Request Link") IsDownloaded: Boolean
+    local procedure DownloadContent(var DataRequestLink: Record "MDS Data Source Link") IsDownloaded: Boolean
     var
         hPersistentBlob: Codeunit "MDS Persistent Blob Helper";
         IStream: InStream;
@@ -265,32 +265,32 @@ codeunit 50108 "MDS Website Impl." implements "MDS IData Provider"
     end;
 
     [IntegrationEvent(false, false)]
-    procedure OnBeforeDownloadContentRequestLink(var DataRequestLink: Record "MDS Data Request Link"; var IsHandled: Boolean; var IsDownloaded: Boolean)
+    procedure OnBeforeDownloadContentRequestLink(var DataRequestLink: Record "MDS Data Source Link"; var IsHandled: Boolean; var IsDownloaded: Boolean)
     begin
     end;
 
     [IntegrationEvent(false, false)]
-    procedure OnAfterDownloadContentRequestLink(var DataRequestLink: Record "MDS Data Request Link"; IsHandled: Boolean; var IsDownloaded: Boolean)
+    procedure OnAfterDownloadContentRequestLink(var DataRequestLink: Record "MDS Data Source Link"; IsHandled: Boolean; var IsDownloaded: Boolean)
     begin
     end;
 
     [IntegrationEvent(false, false)]
-    procedure OnBeforeCreateDataRequestLinks(var DataRequestConfig: Record "MDS Data Request Config"; var ContentStream: InStream; var IsHandled: Boolean; var IsCreated: Boolean)
+    procedure OnBeforeCreateDataRequestLinks(var DataRequestConfig: Record "MDS Data Source"; var ContentStream: InStream; var IsHandled: Boolean; var IsCreated: Boolean)
     begin
     end;
 
     [IntegrationEvent(false, false)]
-    procedure OnAfterCreateDataRequestLinks(var DataRequestConfig: Record "MDS Data Request Config"; var ContentStream: InStream; IsHandled: Boolean; var IsCreated: Boolean)
+    procedure OnAfterCreateDataRequestLinks(var DataRequestConfig: Record "MDS Data Source"; var ContentStream: InStream; IsHandled: Boolean; var IsCreated: Boolean)
     begin
     end;
 
     [IntegrationEvent(false, false)]
-    procedure OnBeforeCall(var DataRequestConfig: Record "MDS Data Request Config"; var ContentStream: InStream; var IsHandled: Boolean; var IsCalled: Boolean)
+    procedure OnBeforeCall(var DataRequestConfig: Record "MDS Data Source"; var ContentStream: InStream; var IsHandled: Boolean; var IsCalled: Boolean)
     begin
     end;
 
     [IntegrationEvent(false, false)]
-    procedure OnAfterCall(var DataRequestConfig: Record "MDS Data Request Config"; var ContentStream: InStream; IsHandled: Boolean; var IsCalled: Boolean)
+    procedure OnAfterCall(var DataRequestConfig: Record "MDS Data Source"; var ContentStream: InStream; IsHandled: Boolean; var IsCalled: Boolean)
     begin
     end;
 }

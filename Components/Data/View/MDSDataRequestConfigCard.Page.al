@@ -5,7 +5,7 @@ page 50106 "MDS Data Request Config Card"
     ApplicationArea = All;
     Caption = 'Data Request Config Card';
     PageType = Card;
-    SourceTable = "MDS Data Request Config";
+    SourceTable = "MDS Data Source";
     DelayedInsert = true;
 
     layout
@@ -83,7 +83,7 @@ page 50106 "MDS Data Request Config Card"
             {
                 trigger OnAction()
                 begin
-                    sRequestConfig.CreateDataRequestLinks(Rec);
+                    sRequestConfig.CreateDataSourceLinks(Rec);
                 end;
             }
 
@@ -91,7 +91,7 @@ page 50106 "MDS Data Request Config Card"
             {
                 trigger OnAction()
                 begin
-                    sRequestConfig.DownloadRequestContent(Rec);
+                    sRequestConfig.DownloadSourceLinkContent(Rec);
                 end;
             }
         }
@@ -100,20 +100,20 @@ page 50106 "MDS Data Request Config Card"
             action("Request Links")
             {
                 Caption = 'Request Links';
-                RunObject = Page "MDS Data Request Link List";
+                RunObject = Page "MDS Data Source Link List";
                 RunPageLink = "Config No." = field("No.");
             }
             action("Request Attributes")
             {
                 Caption = 'Request Attributes';
-                RunObject = Page "MDS Data Request Attr. List";
+                RunObject = Page "MDS Data Source Attr. List";
                 RunPageLink = "Request Config No" = field("No.");
             }
         }
     }
 
     var
-        sRequestConfig: Codeunit "MDS Data Request Conf. Service";
+        sRequestConfig: Codeunit "MDS Data Source Service";
         sDataProvider: Codeunit "MDS Data Provider Service";
         IsWebSiteFieldsVisible: Boolean;
 

@@ -1,12 +1,12 @@
 namespace mds.mds;
 using AG.MDS.Attributes;
 
-table 50107 "MDS Data Request Attribute"
+table 50107 "MDS Data Source Attribute"
 {
-    Caption = 'Data Attributes';
+    Caption = 'Data Source Attributes';
     DataClassification = CustomerContent;
-    DrillDownPageId = "MDS Data Request Attr. List";
-    LookupPageId = "MDS Data Request Attr. List";
+    DrillDownPageId = "MDS Data Source Attr. List";
+    LookupPageId = "MDS Data Source Attr. List";
 
     fields
     {
@@ -17,7 +17,7 @@ table 50107 "MDS Data Request Attribute"
         field(2; "Request Config No"; Code[20])
         {
             Caption = 'Data Request Config No';
-            TableRelation = "MDS Data Request Config"."No.";
+            TableRelation = "MDS Data Source"."No.";
         }
         field(3; "Attribute Code"; Code[10])
         {
@@ -33,7 +33,7 @@ table 50107 "MDS Data Request Attribute"
             Caption = 'Data Request Config Name';
             Editable = false;
             FieldClass = FlowField;
-            CalcFormula = lookup("MDS Data Request Config".Name where("No." = field("Request Config No")));
+            CalcFormula = lookup("MDS Data Source".Name where("No." = field("Request Config No")));
         }
         field(101; "Attribute Name"; Text[50])
         {
@@ -113,49 +113,49 @@ table 50107 "MDS Data Request Attribute"
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnBeforeOnInsert(var Rec: Record "MDS Data Request Attribute"; IsHandled: Boolean)
+    local procedure OnBeforeOnInsert(var Rec: Record "MDS Data Source Attribute"; IsHandled: Boolean)
     begin
 
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnAfterOnInsert(var Rec: Record "MDS Data Request Attribute"; IsHandled: Boolean)
+    local procedure OnAfterOnInsert(var Rec: Record "MDS Data Source Attribute"; IsHandled: Boolean)
     begin
 
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnBeforeOnModify(var Rec: Record "MDS Data Request Attribute"; xRec: Record "MDS Data Request Attribute"; IsHandled: Boolean)
+    local procedure OnBeforeOnModify(var Rec: Record "MDS Data Source Attribute"; xRec: Record "MDS Data Source Attribute"; IsHandled: Boolean)
     begin
 
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnAfterOnModify(var Rec: Record "MDS Data Request Attribute"; xRec: Record "MDS Data Request Attribute"; IsHandled: Boolean)
+    local procedure OnAfterOnModify(var Rec: Record "MDS Data Source Attribute"; xRec: Record "MDS Data Source Attribute"; IsHandled: Boolean)
     begin
 
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnBeforeOnDelete(var Rec: Record "MDS Data Request Attribute"; IsHandled: Boolean)
+    local procedure OnBeforeOnDelete(var Rec: Record "MDS Data Source Attribute"; IsHandled: Boolean)
     begin
 
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnAfterOnDelete(var Rec: Record "MDS Data Request Attribute"; IsHandled: Boolean)
+    local procedure OnAfterOnDelete(var Rec: Record "MDS Data Source Attribute"; IsHandled: Boolean)
     begin
 
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnBeforeOnRename(var Rec: Record "MDS Data Request Attribute"; xRec: Record "MDS Data Request Attribute"; IsHandled: Boolean)
+    local procedure OnBeforeOnRename(var Rec: Record "MDS Data Source Attribute"; xRec: Record "MDS Data Source Attribute"; IsHandled: Boolean)
     begin
 
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnAfterOnRename(var Rec: Record "MDS Data Request Attribute"; xRec: Record "MDS Data Request Attribute"; IsHandled: Boolean)
+    local procedure OnAfterOnRename(var Rec: Record "MDS Data Source Attribute"; xRec: Record "MDS Data Source Attribute"; IsHandled: Boolean)
     begin
 
     end;
