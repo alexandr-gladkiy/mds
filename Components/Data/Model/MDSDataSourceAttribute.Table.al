@@ -5,8 +5,8 @@ table 50107 "MDS Data Source Attribute"
 {
     Caption = 'Data Source Attributes';
     DataClassification = CustomerContent;
-    DrillDownPageId = "MDS Data Source Attr. List";
-    LookupPageId = "MDS Data Source Attr. List";
+    DrillDownPageId = "MDS Data Attr. List";
+    LookupPageId = "MDS Data Attr. List";
 
     fields
     {

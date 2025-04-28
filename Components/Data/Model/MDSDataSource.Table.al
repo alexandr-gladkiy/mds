@@ -35,23 +35,27 @@ table 50103 "MDS Data Source"
         {
             Caption = 'Http Method';
         }
-        field(10; URI; Text[100])
+        field(10; Path; Text[100])
         {
-            Caption = 'URI';
+            Caption = 'Path';
         }
-        field(11; "Query String"; Text[250])
+        field(11; "Web Sitemap URL"; Text[250])
         {
-            Caption = 'Query String';
+            Caption = 'Web Sitemap Url';
         }
         field(12; "Regex Filter URL"; Text[250])
         {
             Caption = 'Regex Filter URL';
         }
-        field(13; "Request Content"; Text[1024])
+        field(13; "Query String"; Text[250])
+        {
+            Caption = 'Query String';
+        }
+        field(14; "Request Content"; Text[1024])
         {
             Caption = 'Request Content';
         }
-        field(14; "Pattern For Item Link"; Text[1024])
+        field(15; "Pattern For Item Link"; Text[1024])
         {
             Caption = 'Patten for item link';
         }

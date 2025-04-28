@@ -33,10 +33,6 @@ table 50102 "MDS Data Provider"
         {
             Caption = 'Base URL';
         }
-        field(11; "Web Sitemap Url"; Text[250])
-        {
-            Caption = 'Web Sitemap Url';
-        }
         field(20; "Authorization Type"; Enum "MDS Authorization Type")
         {
             Caption = 'Authorization Type';
@@ -55,6 +51,13 @@ table 50102 "MDS Data Provider"
             Editable = false;
             FieldClass = FlowField;
             CalcFormula = count("MDS Data Source Attribute" where("Data Provider No." = field("No."), "Request Config No" = const('')));
+        }
+        field(101; "Source Count"; Integer)
+        {
+            Caption = 'Source Count';
+            Editable = false;
+            FieldClass = FlowField;
+            CalcFormula = count("MDS Data Source" where("Data Provider No." = field("No.")));
         }
     }
     keys

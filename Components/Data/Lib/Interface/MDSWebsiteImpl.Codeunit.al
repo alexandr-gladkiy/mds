@@ -67,7 +67,7 @@ codeunit 50108 "MDS Website Impl." implements "MDS IData Provider"
         Clear(hHttp);
         DataRequestConfig.TestField("Data Provider No.");
         sDataProvider."Set.ByPK"(DataRequestConfig."Data Provider No.");
-        URL := sDataProvider."Get.WebBaseUrl"(true) + DataRequestConfig.URI + DataRequestConfig."Query String";
+        URL := sDataProvider."Get.WebBaseUrl"(true) + DataRequestConfig.Path + DataRequestConfig."Query String";
 
         hHttp."Set.Method"("Http Method"::GET);
         hHttp."Set.Url"(URL);

@@ -1,9 +1,9 @@
 namespace mds.mds;
 
-page 50106 "MDS Data Request Config Card"
+page 50106 "MDS Data Source Card"
 {
     ApplicationArea = All;
-    Caption = 'Data Request Config Card';
+    Caption = 'Data Source Card';
     PageType = Card;
     SourceTable = "MDS Data Source";
     DelayedInsert = true;
@@ -48,7 +48,7 @@ page 50106 "MDS Data Request Config Card"
                 {
                     ToolTip = 'Specifies the value of the Http Method field.', Comment = '%';
                 }
-                field(URI; Rec.URI)
+                field(URI; Rec.Path)
                 {
                     ToolTip = 'Specifies the value of the URI field.', Comment = '%';
                 }
@@ -106,7 +106,7 @@ page 50106 "MDS Data Request Config Card"
             action("Request Attributes")
             {
                 Caption = 'Request Attributes';
-                RunObject = Page "MDS Data Source Attr. List";
+                RunObject = Page "MDS Data Attr. List";
                 RunPageLink = "Request Config No" = field("No.");
             }
         }

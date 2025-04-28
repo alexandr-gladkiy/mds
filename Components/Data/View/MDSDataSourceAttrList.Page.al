@@ -1,9 +1,9 @@
 namespace mds.mds;
 
-page 50110 "MDS Data Source Attr. List"
+page 50110 "MDS Data Attr. List"
 {
     ApplicationArea = All;
-    Caption = 'Data Attribute List';
+    Caption = 'Source Attribute List';
     PageType = List;
     SourceTable = "MDS Data Source Attribute";
     UsageCategory = None;

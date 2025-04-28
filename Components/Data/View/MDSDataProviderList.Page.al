@@ -28,7 +28,7 @@ page 50104 "MDS Data Provider List"
                 {
                     ToolTip = 'Specifies the value of the Description field.', Comment = '%';
                 }
-                field("Type"; Rec."Type")
+                field(Type; Rec."Type")
                 {
                     ToolTip = 'Specifies the value of the Type field.', Comment = '%';
                 }

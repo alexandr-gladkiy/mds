@@ -3,7 +3,7 @@ namespace mds.mds;
 page 50113 "MDS Data Source Link List"
 {
     ApplicationArea = All;
-    Caption = 'Source Request Links';
+    Caption = 'Data Source Links';
     PageType = List;
     SourceTable = "MDS Data Source Link";
     DelayedInsert = true;

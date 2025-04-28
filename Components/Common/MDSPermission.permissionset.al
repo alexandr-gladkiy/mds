@@ -25,7 +25,7 @@ permissionset 50100 "MDS Permission"
         page "MDS Data Provider Card" = X,
         page "MDS Role Center" = X,
         page "MDS Setup Card" = X,
-        page "MDS Data Request Config Card" = X,
+        page "MDS Data Source Card" = X,
         page "MDS Data Source List" = X,
         tabledata "MDS Http Header" = RIMD,
         table "MDS Http Header" = X,
@@ -47,7 +47,7 @@ permissionset 50100 "MDS Permission"
         codeunit "MDS Setup Service" = X,
         codeunit "MDS Value Helper" = X,
         page "MDS Data Source Link List" = X,
-        page "MDS Data Source Attr. List" = X,
+        page "MDS Data Attr. List" = X,
         tabledata "MDS Data Parse Rule" = RIMD,
         table "MDS Data Parse Rule" = X;
 }

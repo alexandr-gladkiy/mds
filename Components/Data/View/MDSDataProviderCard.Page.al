@@ -30,13 +30,17 @@ page 50107 "MDS Data Provider Card"
                     {
                         ToolTip = 'Specifies the value of the Description field.', Comment = '%';
                     }
-                }
-                group("General Right")
-                {
                     field(Type; Rec."Type")
                     {
                         ToolTip = 'Specifies the value of the Type field.', Comment = '%';
                     }
+                    field("Base URL"; Rec."Base URL")
+                    {
+                        ToolTip = 'Specifies the value of the Web Base URL field.', Comment = '%';
+                    }
+                }
+                group("General Right")
+                {
                     field(Status; Rec.Status)
                     {
                         ToolTip = 'Specifies the value of the Status field.', Comment = '%';
@@ -45,20 +49,12 @@ page 50107 "MDS Data Provider Card"
                     {
                         ToolTip = 'Specifies the value of the Attribute Count field.', Comment = '%';
                     }
+                    field("Source Count"; Rec."Source Count")
+                    {
+                        ToolTip = 'Specifies the value of the Source Count field.', Comment = '%';
+                    }
                 }
 
-            }
-            group("Website fields")
-            {
-                ShowCaption = false;
-                field("Web Base URL"; Rec."Base URL")
-                {
-                    ToolTip = 'Specifies the value of the Web Base URL field.', Comment = '%';
-                }
-                field("Web Sitemap Url"; Rec."Web Sitemap Url")
-                {
-                    ToolTip = 'Specifies the value of the Web Sitemap Url field.', Comment = '%';
-                }
             }
             group(Authorization)
             {
@@ -92,6 +88,11 @@ page 50107 "MDS Data Provider Card"
         }
         area(Navigation)
         {
+            action(Sources)
+            {
+                RunObject = Page "MDS Data Source List";
+                RunPageLink = "Data Provider No." = field("No.");
+            }
             action("Http Headers")
             {
                 RunObject = Page "MDS Data Http Header List";
