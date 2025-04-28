@@ -22,7 +22,7 @@ page 50112 "MDS Data Parse Rule"
                 {
                     ToolTip = 'Specifies the value of the Data Provider No. field.', Comment = '%';
                 }
-                field("Request Config No."; Rec."Request Config No.")
+                field("Request Config No."; Rec."Data Source No.")
                 {
                     ToolTip = 'Specifies the value of the Request Config No. field.', Comment = '%';
                 }

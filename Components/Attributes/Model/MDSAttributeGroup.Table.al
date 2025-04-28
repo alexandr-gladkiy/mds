@@ -1,3 +1,4 @@
+namespace mds.mds;
 table 50101 "MDS Attribute Group"
 {
     Caption = 'MDS Attribute Group';

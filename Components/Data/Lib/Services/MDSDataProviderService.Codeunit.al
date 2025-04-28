@@ -132,7 +132,7 @@ codeunit 50104 "MDS Data Provider Service"
 
     procedure "Impl.DownloadContentRequestLink"(var DataRequestLink: Record "MDS Data Source Link"): Boolean
     begin
-        this.sDataRequestConfig."Set.ByPK"(DataRequestLink."Config No.");
+        this.sDataRequestConfig."Set.ByPK"(DataRequestLink."Data Source No.");
         "Set.ByPK"(this.sDataRequestConfig."Get.DataProviderNo"(true));
         InitInterface("Get.Type"());
         exit(this.IDataProvider.DownloadContentRequestLink(DataRequestLink))

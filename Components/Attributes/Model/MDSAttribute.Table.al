@@ -1,5 +1,4 @@
-namespace AG.MDS.Attributes;
-using mds.mds;
+namespace mds.mds;
 
 table 50100 "MDS Attribute"
 {

@@ -1,3 +1,4 @@
+namespace mds.mds;
 codeunit 50100 "MDS Attribute Management"
 {
     Subtype = Normal;

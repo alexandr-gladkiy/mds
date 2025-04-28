@@ -5,7 +5,7 @@ page 50110 "MDS Data Attr. List"
     ApplicationArea = All;
     Caption = 'Data Attribute List';
     PageType = List;
-    SourceTable = "MDS Data Source Attribute";
+    SourceTable = "MDS Data Attribute";
     UsageCategory = None;
 
     layout
@@ -19,7 +19,7 @@ page 50110 "MDS Data Attr. List"
                     ToolTip = 'Specifies the value of the Data Provider No. field.', Comment = '%';
                     Visible = false;
                 }
-                field("Data Request Config No"; Rec."Request Config No")
+                field("Data Request Config No"; Rec."Data Source No.")
                 {
                     ToolTip = 'Specifies the value of the Data Request Config No field.', Comment = '%';
                     Visible = false;

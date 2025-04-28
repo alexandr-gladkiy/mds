@@ -14,7 +14,7 @@ page 50113 "MDS Data Source Link List"
         {
             repeater(General)
             {
-                field("Source No."; Rec."Config No.")
+                field("Source No."; Rec."Data Source No.")
                 {
                     ToolTip = 'Specifies the value of the Source No. field.', Comment = '%';
                     Visible = false;

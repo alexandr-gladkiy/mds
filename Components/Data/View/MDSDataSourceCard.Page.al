@@ -101,13 +101,13 @@ page 50106 "MDS Data Source Card"
             {
                 Caption = 'Request Links';
                 RunObject = Page "MDS Data Source Link List";
-                RunPageLink = "Config No." = field("No.");
+                RunPageLink = "Data Source No." = field("No.");
             }
             action("Request Attributes")
             {
                 Caption = 'Request Attributes';
                 RunObject = Page "MDS Data Attr. List";
-                RunPageLink = "Request Config No" = field("No.");
+                RunPageLink = "Data Source No." = field("No.");
             }
         }
     }

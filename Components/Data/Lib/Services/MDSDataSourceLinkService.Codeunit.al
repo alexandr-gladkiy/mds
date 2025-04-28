@@ -11,7 +11,7 @@ codeunit 50113 "MDS Data Source Link Service"
 
     procedure "Set.ByPK"(RequestConfigNo: Code[20]; LinkId: Integer): Boolean
     begin
-        if this.HasDataSourceLink and (this.DataSourceLink."Config No." = RequestConfigNo) and (this.DataSourceLink."Link ID" = LinkId) then
+        if this.HasDataSourceLink and (this.DataSourceLink."Data Source No." = RequestConfigNo) and (this.DataSourceLink."Link ID" = LinkId) then
             exit(true);
 
         this.HasDataSourceLink := this.DataSourceLink.Get(RequestConfigNo, LinkId);
@@ -32,8 +32,8 @@ codeunit 50113 "MDS Data Source Link Service"
     procedure "GetSetOf.ByConfigNo"(ConfigCode: Code[20]; var DataSourceLink: Record "MDS Data Source Link"): Boolean
     begin
         DataSourceLink.Reset();
-        DataSourceLink.SetCurrentKey("Config No.", "Link ID");
-        DataSourceLink.SetRange("Config No.", ConfigCode);
+        DataSourceLink.SetCurrentKey("Data Source No.", "Link ID");
+        DataSourceLink.SetRange("Data Source No.", ConfigCode);
         exit(not DataSourceLink.IsEmpty());
     end;
 

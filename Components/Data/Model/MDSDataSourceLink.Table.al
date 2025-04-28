@@ -7,26 +7,26 @@ table 50108 "MDS Data Source Link"
 
     fields
     {
-        field(1; "Config No."; Code[20])
+        field(1; "Data Source No."; Code[20])
         {
-            Caption = 'Config No.';
+            Caption = 'Data Source No.';
         }
         field(2; "Link ID"; Integer)
         {
             Caption = 'Link ID';
         }
-        field(3; "Reference No."; Code[30])
+        field(3; "Link Path"; Text[1024])
         {
-            Caption = 'Reference No.';
-        }
-        field(4; "Link Path"; Text[1024])
-        {
-            Caption = 'Url';
+            Caption = 'Link Path';
             ExtendedDatatype = URL;
         }
-        field(5; "Link Path As MD5"; Text[32])
+        field(4; "Link Path As MD5"; Text[32])
         {
-            Caption = 'Url As MD5';
+            Caption = 'Link Path As MD5';
+        }
+        field(5; "Reference No."; Code[30])
+        {
+            Caption = 'Reference No.';
         }
         field(6; GTIN; Code[30])
         {
@@ -69,12 +69,12 @@ table 50108 "MDS Data Source Link"
             Caption = 'Config Name';
             Editable = false;
             FieldClass = FlowField;
-            CalcFormula = lookup("MDS Data Source".Name where("No." = field("Config No.")));
+            CalcFormula = lookup("MDS Data Source".Name where("No." = field("Data Source No.")));
         }
     }
     keys
     {
-        key(PK; "Config No.", "Link ID")
+        key(PK; "Data Source No.", "Link ID")
         {
             Clustered = true;
         }
@@ -85,7 +85,7 @@ table 50108 "MDS Data Source Link"
     }
     fieldgroups
     {
-        fieldgroup(DrawDown; "Config No.", "Link ID", "Link Path", "Reference No.", Status) { }
+        fieldgroup(DrawDown; "Data Source No.", "Link ID", "Link Path", "Reference No.", Status) { }
     }
 
     var

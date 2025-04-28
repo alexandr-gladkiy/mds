@@ -18,7 +18,7 @@ page 50109 "MDS Data Http Header List"
                 {
                     ToolTip = 'Specifies the value of the Data Povider No. field.', Comment = '%';
                 }
-                field("Source No."; Rec."Source No.")
+                field("Source No."; Rec."Data Source No.")
                 {
                     ToolTip = 'Specifies the value of the Source No. field.', Comment = '%';
                 }

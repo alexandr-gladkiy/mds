@@ -85,7 +85,7 @@ table 50103 "MDS Data Source"
             Caption = 'Attribute Rules';
             Editable = false;
             FieldClass = FlowField;
-            CalcFormula = count("MDS Data Parse Rule" where("Data Provider No." = field("No."), "Request Config No." = field("No.")));
+            CalcFormula = count("MDS Data Parse Rule" where("Data Provider No." = field("No."), "Data Source No." = field("No.")));
         }
     }
     keys

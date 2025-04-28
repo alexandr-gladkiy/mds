@@ -11,9 +11,9 @@ table 50109 "MDS Data Parse Rule"
         {
             Caption = 'Data Provider No.';
         }
-        field(2; "Request Config No."; Code[20])
+        field(2; "Data Source No."; Code[20])
         {
-            Caption = 'Request Config No.';
+            Caption = 'Data Source No.';
         }
         field(3; "Attribute Code"; Code[10])
         {
@@ -46,7 +46,7 @@ table 50109 "MDS Data Parse Rule"
     }
     keys
     {
-        key(PK; "Data Provider No.", "Request Config No.", "Attribute Code")
+        key(PK; "Data Provider No.", "Data Source No.", "Attribute Code")
         {
             Clustered = true;
         }

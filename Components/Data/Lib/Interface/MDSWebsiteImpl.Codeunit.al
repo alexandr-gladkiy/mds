@@ -179,7 +179,7 @@ codeunit 50108 "MDS Website Impl." implements "MDS IData Provider"
         DataRequestLinkBuffer.Reset();
         DataRequestLinkBuffer.SetCurrentKey("Link Path as MD5");
         DataRequestLinkBuffer.SetRange("Link Path as MD5", LinkPathAsMD5);
-        DataRequestLinkBuffer.SetRange("Config No.", DataRequestConfig."No.");
+        DataRequestLinkBuffer.SetRange("Data Source No.", DataRequestConfig."No.");
         if not DataRequestLinkBuffer.FindFirst() then
             Create := true;
 
@@ -187,7 +187,7 @@ codeunit 50108 "MDS Website Impl." implements "MDS IData Provider"
             DataRequestLinkBuffer.Init();
             DataRequestLinkBuffer."Link ID" := GetRequestLinkBufferLastLinkId(DataRequestConfig."No.", DataRequestLinkBuffer) + 1;
         end;
-        DataRequestLinkBuffer."Config No." := DataRequestConfig."No.";
+        DataRequestLinkBuffer."Data Source No." := DataRequestConfig."No.";
         DataRequestLinkBuffer."Link Path" := CopyStr(LinkPath, 1, MaxStrLen(DataRequestLinkBuffer."Link Path"));
         DataRequestLinkBuffer."Link Path as MD5" := CopyStr(LinkPathAsMD5, 1, MaxStrLen(DataRequestLinkBuffer."Link Path as MD5"));
         //TODO: DataRequestLinkBuffer."Link Last Modified" := hValue.ConvertDateStringToDateTime(LinkLastModify);
@@ -223,7 +223,7 @@ codeunit 50108 "MDS Website Impl." implements "MDS IData Provider"
     local procedure GetRequestLinkBufferLastLinkId(RequestConfigNo: Code[20]; var DataRequestLinkBuffer: Record "MDS Data Source Link"): Integer
     begin
         DataRequestLinkBuffer.Reset();
-        DataRequestLinkBuffer.SetRange("Config No.", RequestConfigNo);
+        DataRequestLinkBuffer.SetRange("Data Source No.", RequestConfigNo);
         if DataRequestLinkBuffer.FindLast() then
             exit(DataRequestLinkBuffer."Link ID")
     end;

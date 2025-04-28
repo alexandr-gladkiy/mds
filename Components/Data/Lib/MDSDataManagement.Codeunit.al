@@ -189,7 +189,7 @@ codeunit 50103 "MDS Data Management"
 
     procedure "DataRequestLink.CreateOrModify.Single"(DataRequestLink: Record "MDS Data Source Link"; RunTrigger: Boolean) RecordId: RecordId
     begin
-        if this.DataRequestLink.Get(DataRequestLink."Config No.", DataRequestLink."Link ID") then begin
+        if this.DataRequestLink.Get(DataRequestLink."Data Source No.", DataRequestLink."Link ID") then begin
             this.DataRequestLink.TransferFields(DataRequestLink, false);
             this.DataRequestLink.Modify(RunTrigger);
         end else begin
@@ -201,22 +201,22 @@ codeunit 50103 "MDS Data Management"
         RecordId := this.DataRequestLink.RecordId;
     end;
 
-    procedure "DataRequestAttribute.OnInsert"(var DataRequestAttribute: Record "MDS Data Source Attribute")
+    procedure "DataRequestAttribute.OnInsert"(var DataRequestAttribute: Record "MDS Data Attribute")
     begin
 
     end;
 
-    procedure "DataRequestAttribute.OnModify"(var DataRequestAttribute: Record "MDS Data Source Attribute"; xDataRequestAttribute: Record "MDS Data Source Attribute")
+    procedure "DataRequestAttribute.OnModify"(var DataRequestAttribute: Record "MDS Data Attribute"; xDataRequestAttribute: Record "MDS Data Attribute")
     begin
 
     end;
 
-    procedure "DataRequestAttribute.OnDelete"(var DataRequestAttribute: Record "MDS Data Source Attribute")
+    procedure "DataRequestAttribute.OnDelete"(var DataRequestAttribute: Record "MDS Data Attribute")
     begin
 
     end;
 
-    procedure "DataRequestAttribute.OnRename"(var DataRequestAttribute: Record "MDS Data Source Attribute"; xDataRequestAttribute: Record "MDS Data Source Attribute")
+    procedure "DataRequestAttribute.OnRename"(var DataRequestAttribute: Record "MDS Data Attribute"; xDataRequestAttribute: Record "MDS Data Attribute")
     begin
 
     end;

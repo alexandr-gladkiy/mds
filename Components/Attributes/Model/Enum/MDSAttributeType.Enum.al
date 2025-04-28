@@ -1,3 +1,4 @@
+namespace mds.mds;
 enum 50100 "MDS Attribute Type"
 {
     Extensible = true;

@@ -11,9 +11,9 @@ table 50105 "MDS Data Http Header"
         {
             Caption = 'Data Provider No.';
         }
-        field(2; "Source No."; Code[20])
+        field(2; "Data Source No."; Code[20])
         {
-            Caption = 'Source No.';
+            Caption = 'Data Source No.';
         }
         field(3; "Http Header Code"; Code[20])
         {
@@ -23,14 +23,14 @@ table 50105 "MDS Data Http Header"
     }
     keys
     {
-        key(PK; "Data Provider No.", "Source No.", "Http Header Code")
+        key(PK; "Data Provider No.", "Data Source No.", "Http Header Code")
         {
             Clustered = true;
         }
     }
     fieldgroups
     {
-        fieldgroup(DrawDown; "Data Provider No.", "Source No.", "Http Header Code") { }
+        fieldgroup(DrawDown; "Data Provider No.", "Data Source No.", "Http Header Code") { }
     }
 
 
