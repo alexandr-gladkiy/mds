@@ -1,6 +1,7 @@
 namespace mds.mds;
 using System.RestClient;
 using System.IO;
+using System.Text;
 using System.Utilities;
 
 codeunit 50114 "MDS OData Impl." implements "MDS IData Provider"
@@ -54,22 +55,42 @@ codeunit 50114 "MDS OData Impl." implements "MDS IData Provider"
     local procedure CallDataRequestContent(var DataRequestConfig: Record "MDS Data Source"; var ContentStream: InStream) ExistContent: Boolean
     var
         URL: Text;
+        mDataMgt: Codeunit "MDS Data Management";
+        JText: Text;
+        hPerBlob: Codeunit "MDS Persistent Blob Helper";
+        BlobKey: BigInteger;
+        TempBlob: Codeunit "Temp Blob";
+        oStream: OutStream;
+        JsonBuffer: Record "JSON Buffer" temporary;
+        JsonMgt: Codeunit "JSON Management";
     begin
         Clear(hHttp);
         DataRequestConfig.TestField("Data Provider No.");
-        DataRequestConfig.TestField("Query String");
         if DataRequestConfig."Http Method" = DataRequestConfig."Http Method"::POST then
             DataRequestConfig.TestField("Request Content");
         sDataProvider."Set.ByPK"(DataRequestConfig."Data Provider No.");
-        URL := sDataProvider."Get.WebBaseUrl"(true) + DataRequestConfig."Query String";
+        URL := sDataProvider."Get.WebBaseUrl"(true) + DataRequestConfig."Path" + DataRequestConfig."Query String";
 
         if DataRequestConfig."Http Method" = DataRequestConfig."Http Method"::POST then
             hHttp."Set.RequestContent"(DataRequestConfig."Request Content");
         hHttp."Set.Method"(DataRequestConfig."Http Method");
         hHttp."Set.Url"(URL);
+        hHttp."Set.AuthorizationType"(sDataProvider."Get.AuthorizationType"(true));
+        hHttp."Set.Login"(sDataProvider."Get.Login"(true));
+        hHttp."Set.Password"(sDataProvider."Get.Password"(true));
         ExistContent := hHttp.Call();
         if ExistContent then
-            exit(hHttp."Get.Content.As.Stream"(ContentStream));
+            hHttp."Get.Content.As.Text"(JText);
+
+        Message(JText);
+
+        TempBlob.CreateInStream(ContentStream);
+        TempBlob.CreateOutStream(oStream);
+        //ContentStream.Read(JText);
+        oStream.Write(JText);
+
+        JsonBuffer.ReadFromText(JText);
+        Page.Run(Page::JBuffer, JsonBuffer);
     end;
 
     procedure CreateDataRequestLinks(var DataRequestConfig: Record "MDS Data Source"; var ContentStream: InStream) IsCreated: Boolean
@@ -83,8 +104,8 @@ codeunit 50114 "MDS OData Impl." implements "MDS IData Provider"
     end;
 
     local procedure ParseDataRequestContent(var DataRequestConfig: Record "MDS Data Source"; var ContentStream: InStream): Boolean
+    var
     begin
-
     end;
 
 

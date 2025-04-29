@@ -28,10 +28,6 @@ table 50108 "MDS Data Source Link"
         {
             Caption = 'Reference No.';
         }
-        field(6; GTIN; Code[30])
-        {
-            Caption = 'GTIN';
-        }
         field(7; Status; Enum "MDS Status")
         {
             Caption = 'Status';

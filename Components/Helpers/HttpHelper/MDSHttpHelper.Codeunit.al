@@ -1,5 +1,6 @@
 namespace mds.mds;
 using System.Security.Authentication;
+using System.Text;
 using System.RestClient;
 using System.Utilities;
 
@@ -14,11 +15,17 @@ codeunit 50109 "MDS Http Helper"
         Url: Text;
         RequestContent: Text;
         Method: Enum "Http Method";
+        Login: Text;
+        Password: Text;
+        Token: Text;
+        AuthType: Enum "MDS Authorization Type";
 
     procedure Call(): Boolean
     begin
+        this."Apply.Authentication"(this.Client);
         this.Request.Method(Format(this.Method));
         this.Request.SetRequestUri(this.Url);
+
 
         this.Client.Send(this.Request, this.Response);
         exit(this.Response.IsSuccessStatusCode);
@@ -37,6 +44,21 @@ codeunit 50109 "MDS Http Helper"
     procedure "Set.RequestContent"(RequestContent: Text)
     begin
         this.RequestContent := RequestContent;
+    end;
+
+    procedure "Set.AuthorizationType"(AuthType: Enum "MDS Authorization Type")
+    begin
+        this.AuthType := AuthType;
+    end;
+
+    procedure "Set.Login"(Login: Text)
+    begin
+        this.Login := Login;
+    end;
+
+    procedure "Set.Password"(Password: Text)
+    begin
+        this.Password := Password;
     end;
 
     procedure "Get.Response.StatusCode"(): Integer
@@ -91,5 +113,24 @@ codeunit 50109 "MDS Http Helper"
         for index := 1 to NumberOfSegments - 1 do
             Segments += SegmentList.Get(index);
         UriPath := Scheme + Host + Segments;
+    end;
+
+    local procedure "Apply.Authentication"(var Client: HttpClient)
+    begin
+        case this.AuthType of
+            this.AuthType::Basic:
+                this.AddBasicAuthHeader(Client, this.Login, this.Password);
+        end;
+    end;
+
+    local procedure AddBasicAuthHeader(var Client: HttpClient; UserName: Text; Password: Text);
+    var
+        Base64: Codeunit "Base64 Convert";
+        AuthString: Text;
+    begin
+        AuthString := StrSubstNo('%1:%2', UserName, Password);
+        AuthString := Base64.ToBase64(AuthString);
+        AuthString := StrSubstNo('Basic %1', AuthString);
+        Client.DefaultRequestHeaders().Add('Authorization', AuthString);
     end;
 }

@@ -41,10 +41,6 @@ page 50113 "MDS Data Source Link List"
                 {
                     ToolTip = 'Specifies the value of the Reference No. field.', Comment = '%';
                 }
-                field(GTIN; Rec.GTIN)
-                {
-                    ToolTip = 'Specifies the value of the GTIN field.', Comment = '%';
-                }
                 field(Status; Rec.Status)
                 {
                     ToolTip = 'Specifies the value of the Status field.', Comment = '%';

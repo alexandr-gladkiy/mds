@@ -64,6 +64,30 @@ codeunit 50104 "MDS Data Provider Service"
         exit(this.DataProvider."Base URL");
     end;
 
+    procedure "Get.AuthorizationType"(DoTestField: Boolean): Enum "MDS Authorization Type"
+    begin
+        TestSetup();
+        if DoTestField then
+            this.DataProvider.TestField("Authorization Type");
+        exit(this.DataProvider."Authorization Type");
+    end;
+
+    procedure "Get.Login"(DoTestField: Boolean): Text
+    begin
+        TestSetup();
+        if DoTestField then
+            this.DataProvider.TestField(Login);
+        exit(this.DataProvider.Login);
+    end;
+
+    procedure "Get.Password"(DoTestField: Boolean): Text
+    begin
+        TestSetup();
+        if DoTestField then
+            this.DataProvider.TestField(Password);
+        exit(this.DataProvider.Password);
+    end;
+
     procedure IsSet(): Boolean
     begin
         exit(this.IsSetup);

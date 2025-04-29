@@ -1,5 +1,7 @@
 namespace mds.mds;
 using Microsoft.Foundation.NoSeries;
+using System.Text;
+using System.IO;
 
 codeunit 50103 "MDS Data Management"
 {
@@ -239,5 +241,14 @@ codeunit 50103 "MDS Data Management"
     procedure "DataParseRule.OnRename"(var DataParseRule: Record "MDS Data Parse Rule"; xDataParseRule: Record "MDS Data Parse Rule")
     begin
 
+    end;
+
+
+    procedure TestParseJson(JsonText: Text)
+    var
+        JsonBuffer: Record "JSON Buffer" temporary;
+    begin
+        JsonBuffer.ReadFromText(JsonText);
+        Page.Run(Page::JBuffer, JsonBuffer);
     end;
 }
