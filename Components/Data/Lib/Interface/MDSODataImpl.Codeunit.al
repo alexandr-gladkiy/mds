@@ -8,6 +8,7 @@ codeunit 50114 "MDS OData Impl." implements "MDS IData Provider"
 {
     var
         sDataProvider: Codeunit "MDS Data Provider Service";
+        mData: Codeunit "MDS Data Management";
         hHttp: Codeunit "MDS Http Helper";
 
     procedure SetDataProvider(DataProviderNo: Code[20]): Boolean
@@ -55,14 +56,6 @@ codeunit 50114 "MDS OData Impl." implements "MDS IData Provider"
     local procedure CallDataRequestContent(var DataRequestConfig: Record "MDS Data Source"; var ContentStream: InStream) ExistContent: Boolean
     var
         URL: Text;
-        mDataMgt: Codeunit "MDS Data Management";
-        JText: Text;
-        hPerBlob: Codeunit "MDS Persistent Blob Helper";
-        BlobKey: BigInteger;
-        TempBlob: Codeunit "Temp Blob";
-        oStream: OutStream;
-        JsonBuffer: Record "JSON Buffer" temporary;
-        JsonMgt: Codeunit "JSON Management";
     begin
         Clear(hHttp);
         DataRequestConfig.TestField("Data Provider No.");
@@ -80,20 +73,10 @@ codeunit 50114 "MDS OData Impl." implements "MDS IData Provider"
         hHttp."Set.Password"(sDataProvider."Get.Password"(true));
         ExistContent := hHttp.Call();
         if ExistContent then
-            hHttp."Get.Content.As.Text"(JText);
-
-        Message(JText);
-
-        TempBlob.CreateInStream(ContentStream);
-        TempBlob.CreateOutStream(oStream);
-        //ContentStream.Read(JText);
-        oStream.Write(JText);
-
-        JsonBuffer.ReadFromText(JText);
-        Page.Run(Page::JBuffer, JsonBuffer);
+            exit(hHttp."Get.Content.As.Stream"(ContentStream));
     end;
 
-    procedure CreateDataRequestLinks(var DataRequestConfig: Record "MDS Data Source"; var ContentStream: InStream) IsCreated: Boolean
+    procedure CreateRequestLinks(var DataRequestConfig: Record "MDS Data Source"; var ContentStream: InStream) IsCreated: Boolean
     var
         IsHandled: Boolean;
     begin
@@ -105,7 +88,38 @@ codeunit 50114 "MDS OData Impl." implements "MDS IData Provider"
 
     local procedure ParseDataRequestContent(var DataRequestConfig: Record "MDS Data Source"; var ContentStream: InStream): Boolean
     var
+        JsonBuffer: Record "JSON Buffer" temporary;
+        JsonContent: Text;
+        BlobKey: BigInteger;
+        hPersistentBlob: Codeunit "MDS Persistent Blob Helper";
+        DataSourceLinkBuffer: Record "MDS Data Source Link" temporary;
+        sDataSourceLink: Codeunit "MDS Data Source Link Service";
+        LinkId: Integer;
     begin
+        hPersistentBlob."Upload.AsStream"(ContentStream, BlobKey);
+        JsonContent := hPersistentBlob."Get.AsText"(BlobKey);
+        hPersistentBlob.Delete(BlobKey);
+
+        JsonBuffer.ReadFromText(JsonContent);
+        JsonBuffer.SetRange("Token type", JsonBuffer."Token type"::String);
+        JsonBuffer.SetFilter(Path, '*.SKU');
+        if JsonBuffer.FindSet(false) then begin
+            LinkId := sDataSourceLink."Get.LastLinkId"(DataRequestConfig."No.");
+            repeat
+                LinkId += 1;
+                DataSourceLinkBuffer.Init();
+                DataSourceLinkBuffer."Data Source No." := DataRequestConfig."No.";
+                DataSourceLinkBuffer."Link ID" := LinkId;
+                DataSourceLinkBuffer."Process Status" := DataSourceLinkBuffer."Process Status"::Open;
+                DataSourceLinkBuffer.Status := DataSourceLinkBuffer.Status::Active;
+                DataSourceLinkBuffer."Reference No." := JsonBuffer.Value;
+                DataSourceLinkBuffer."Link Path" := StrSubstNo(DataRequestConfig."Pattern For Item Link", JsonBuffer.Value);
+                DataSourceLinkBuffer."Link Last Modified" := CurrentDateTime();
+                DataSourceLinkBuffer.Insert(false);
+            until JsonBuffer.Next() = 0;
+            mData."DataRequestLink.CreateOrModify.List"(DataSourceLinkBuffer, true);
+        end;
+        //Page.Run(Page::JBuffer, JsonBuffer);
     end;
 
 
@@ -129,13 +143,40 @@ codeunit 50114 "MDS OData Impl." implements "MDS IData Provider"
     begin
     end;
 
-    procedure CreateRequestLinks(var DataRequestConfig: Record "MDS Data Source"; var ContentStream: InStream) IsCreated: Boolean
-    begin
-
-    end;
 
     procedure DownloadContentRequestLink(var DataRequestLink: Record "MDS Data Source Link") IsDownload: Boolean
+    var
+        hPersistentBlob: Codeunit "MDS Persistent Blob Helper";
+        IStream: InStream;
+        sDataSource: Codeunit "MDS Data Source Service";
+        DataSource: Record "MDS Data Source";
     begin
+        Clear(hHttp);
+        DataRequestLink.TestField("Link Path");
+        DataRequestLink."Error Comment" := '';
 
+        sDataSource."Set.ByPK"(DataRequestLink."Data Source No.");
+        DataSource.Get(DataRequestLink."Data Source No.");
+        sDataProvider."Set.ByPK"(DataSource."Data Provider No.");
+        if DataSource."Http Method" = DataSource."Http Method"::POST then
+            hHttp."Set.RequestContent"(DataSource."Request Content");
+        hHttp."Set.Method"(DataSource."Http Method");
+        hHttp."Set.Url"(DataRequestLink."Link Path");
+        hHttp."Set.AuthorizationType"(sDataProvider."Get.AuthorizationType"(true));
+        hHttp."Set.Login"(sDataProvider."Get.Login"(true));
+        hHttp."Set.Password"(sDataProvider."Get.Password"(true));
+        IsDownload := hHttp.Call();
+        if not IsDownload then begin
+            DataRequestLink."Process Status" := DataRequestLink."Process Status"::Error;
+            DataRequestLink."Error Comment" := CopyStr(hHttp."Get.Response.ReasonPhrase"(), 1, MaxStrLen(DataRequestLink."Error Comment"));
+            DataRequestLink."Request Last Datetime" := CreateDateTime(Today(), Time());
+        end;
+
+        hHttp."Get.Content.As.Stream"(IStream);
+        hPersistentBlob."Upload.AsStream"(IStream, DataRequestLink."Blob Key");
+        DataRequestLink."Process Status" := DataRequestLink."Process Status"::Downloaded;
+        DataRequestLink."Request Last Datetime" := CreateDateTime(Today(), Time());
+        DataRequestLink.Modify(false);
+        Commit();
     end;
 }

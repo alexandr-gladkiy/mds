@@ -242,13 +242,4 @@ codeunit 50103 "MDS Data Management"
     begin
 
     end;
-
-
-    procedure TestParseJson(JsonText: Text)
-    var
-        JsonBuffer: Record "JSON Buffer" temporary;
-    begin
-        JsonBuffer.ReadFromText(JsonText);
-        Page.Run(Page::JBuffer, JsonBuffer);
-    end;
 }
